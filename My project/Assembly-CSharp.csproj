@@ -53,6 +53,16 @@
     <UnityVersion>2019.4.34f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_New.cs" />
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDir.cs" />
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RandomDirectionTranslate.cs" />
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_Translate.cs" />
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX\Scripts\CFX_LightFlicker.cs" />
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -111,6 +121,7 @@
   <ItemGroup>
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\Surface2Sided_Shader.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
+    <None Include="Assets\Asset\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\GrainGen.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Editor Resources\Monitors\HistogramCompute.compute" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\FXAA3.cginc" />
@@ -119,6 +130,7 @@
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Editor Resources\UI\CurveBackground.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\WaterGreen_Shader.shader" />
+    <None Include="Assets\Asset\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\BuiltinDebugViews.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\EyeAdaptation.cginc" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\LutGen.shader" />
@@ -127,6 +139,7 @@
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\TAA.cginc" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\AmbientOcclusion.cginc" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\Surface_Shader.shader" />
+    <None Include="Assets\Asset\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Editor Resources\Monitors\VectorscopeCompute.compute" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\ColorGrading.cginc" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\Cloud_Shader.shader" />
@@ -159,6 +172,7 @@
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\Bloom.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\Uber.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\DepthOfField.shader" />
+    <None Include="Assets\Asset\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\Fog_Shader.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\TAA.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\Blit.shader" />

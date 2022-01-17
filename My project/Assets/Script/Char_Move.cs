@@ -21,7 +21,8 @@ public class Char_Move : MonoBehaviour
 
     public void Update()
     {
-        Char_function.MousePos(1, ref TargetPos);
+        Char_function.MousePos(1, transform.position ,ref TargetPos);
+
         Walk_To_Target(TargetPos);
     }
 

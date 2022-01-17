@@ -16,7 +16,7 @@ public class Char_Rotate : MonoBehaviour
 
     public void Rotate_Check()
     {
-        Char_function.MousePos(1, ref TargetPos);
+        Char_function.MousePos(1,transform.position, ref TargetPos);
         Rotate_Target(TargetPos, this.gameObject);
     }
 

@@ -53,6 +53,7 @@
     <UnityVersion>2019.4.34f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Asset\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Editor\Attributes\PostProcessingModelEditorAttribute.cs" />
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Editor\Models\AmbientOcclusionModelEditor.cs" />
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Editor\Models\AntialiasingModelEditor.cs" />
@@ -87,6 +88,9 @@
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Editor\Utils\EditorResources.cs" />
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Editor\Utils\FxStyles.cs" />
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Asset\JMO Assets\Editor\JMOAssets_CartoonFXFreeWelcome.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -295,6 +299,9 @@
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.14.4\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+    </Reference>
+    <Reference Include="JMOAssets_CartoonFXFreeWelcome">
+      <HintPath>Assets\Asset\JMO Assets\Editor\JMOAssets_CartoonFXFreeWelcome.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
