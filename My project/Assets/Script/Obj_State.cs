@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obj_State
+public class Obj_State : MonoBehaviour
 {
     public float Hp; // 체력
     public float Mp; // 마력

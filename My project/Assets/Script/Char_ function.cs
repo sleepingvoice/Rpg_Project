@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class Char_function : MonoBehaviour
 {
-
-    public static void MousePos(int MouseButton, Vector3 StartPos, ref Vector3 TargetPos)
+    public static void MousePos(Vector3 StartPos, ref Vector3 TargetPos)
     {
-        if (Input.GetMouseButtonDown(MouseButton))
-        {
             Ray ray = GameManager.Instance.mainCam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 10000f))
             {
                 TargetPos = PosCorrect(StartPos, hit.point);
             }
-        }
     }
 
     private static Vector3 PosCorrect(Vector3 StartPos ,Vector3 TargetPos)
@@ -29,7 +25,8 @@ public class Char_function : MonoBehaviour
 
         if (Physics.Raycast(StartPos, Dir, out hit, Dis))
         {
-            return CorrectPos(StartPos, hit.transform.position);
+            if (hit.transform.gameObject.tag != "Monster")
+                return CorrectPos(StartPos, hit.transform.position);
         }
         return TargetPos;
     }
@@ -43,5 +40,25 @@ public class Char_function : MonoBehaviour
         correct_pos = firstPos + dir;
 
         return correct_pos;
+    }
+
+    public static GameObject Click_Obj(Vector3 TargetPos , string Target_Tag)
+    {
+        Collider[] colls = Physics.OverlapSphere(TargetPos, 0.5f);
+        GameObject nearObj = null;
+        float dis = 2f;
+        for (int i = 0; i < colls.Length; i++)
+        {
+            if (colls[i].gameObject.tag == Target_Tag)
+            {
+                float TargetDis = Vector3.Distance(colls[i].transform.position, GameManager.Instance.Player.transform.position);
+                if (TargetDis < dis)
+                {
+                    dis = TargetDis;
+                    nearObj = colls[i].gameObject;
+                }
+            }
+        }
+        return nearObj;
     }
 }

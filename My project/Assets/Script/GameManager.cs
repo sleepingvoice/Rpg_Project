@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour
     private static GameManager instance = null;
 
     public Camera mainCam;
+    public Obj_Function Obj_Fun;
     public GameObject Player;
+    public Vector3 TargetPos;
 
     private void Awake()
     {
@@ -15,6 +17,9 @@ public class GameManager : MonoBehaviour
             instance = this;
         else
             Destroy(this.gameObject);
+
+        TargetPos = Player.transform.position;
+        Obj_Fun = GetComponent<Obj_Function>();
     }
     public static GameManager Instance
     {
@@ -28,5 +33,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Char_function.MousePos(Player.transform.position, ref TargetPos);
+        }
+    }
+
+
 }

@@ -7,48 +7,79 @@ public class Char_Move : MonoBehaviour
     public float Speed_move;
     public float Speed_rotate;
 
-    private Vector3 TargetPos;
-    private Rigidbody rigid;
-    private Animator ani;
-    private bool walk;
+    [HideInInspector]public int Attack_num;      // 공격 애니메이션 번호
+
+    private float dis;          // 타겟 위치와 플레이어의 거리
+    private Animator ani;       // 플레이어 애니메이션
+    private bool walk;          // 걷는중 유무체크
+    private bool Atk_now;       // 싸우는중 유무체크
+
+    private Char_Attack myAtk;
 
     private void Awake()
     {
-        rigid = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
-        TargetPos = transform.position;
+        myAtk = GetComponent<Char_Attack>();
+        Atk_now = false;
+        Attack_num = 0;
     }
 
     public void Update()
     {
-        Char_function.MousePos(1, transform.position ,ref TargetPos);
-
-        Walk_To_Target(TargetPos);
+        Walk_To_Target(GameManager.Instance.TargetPos);
     }
 
-    public void Walk_To_Target(Vector3 TargetPos)
+    public void Walk_To_Target(Vector3 TargetPos) // 타겟방향으로 이동
     {
-        float dis = Vector3.Distance(TargetPos, transform.position);
+        if (TargetPos == transform.position)
+            return;
+
+        dis = Vector3.Distance(TargetPos, transform.position);
         walk = false;
-        if (dis>=0.01f)
+        Atk_now = myAtk.Player_AttackCheck();
+
+        if (dis>0.5f || (dis >= 0.01f && !myAtk.now_fight))
         {
-            transform.position = Vector3.MoveTowards(transform.position, TargetPos, Time.deltaTime*Speed_move);
+            transform.position = Vector3.MoveTowards(transform.position, TargetPos, Time.deltaTime * Speed_move);
             walk = true;
 
             Rotate_Target(TargetPos, this.gameObject);
         }
+        else if(myAtk.now_fight && Atk_now)
+        {
+            myAtk.Player_Attack();
+        }
+        
+
         Change_Ani();
     }
 
-    public void Change_Ani()
+    private void Change_Ani()  // 애니메이션 변경
     {
-        if (walk)
+        WalkCheck();
+        Attack_Check();
+    }
+
+    private void WalkCheck()  // 걷는 애니메이션 체크
+    {
+        if (walk && Attack_num == 0)
             ani.SetBool("Walk", true);
         else
             ani.SetBool("Walk", false);
     }
 
-    public void Rotate_Target(Vector3 targetPos, GameObject Obj)
+    private void Attack_Check() //공격 애니메이션 체크
+    {
+        if (myAtk.now_fight)
+            ani.SetInteger("Attack", Attack_num);
+        else
+        {
+            Attack_num = 0;
+            ani.SetInteger("Attack", 0);
+        }
+    }
+
+    private void Rotate_Target(Vector3 targetPos, GameObject Obj) // 타겟 방향으로 회전
     {
         Vector3 dir = targetPos - Obj.transform.position;
         dir.y = 0f;

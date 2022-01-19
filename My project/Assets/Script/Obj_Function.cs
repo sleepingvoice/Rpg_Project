@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Obj_Function:MonoBehaviour
 {
-    public void Attack(GameObject Target,int Damge)
+    public void Attack(GameObject Target,float Damge)
     {
         Obj_State State = Target.GetComponent<Obj_State>();
         if (State != null)
@@ -21,7 +21,7 @@ public class Obj_Function:MonoBehaviour
     {
         if (Target.GetComponent<Animator>() == null)
             yield return null;
-        Target.GetComponent<Animator>().SetBool("Die", true);
+        Target.GetComponent<Animator>().SetTrigger("Die");
         Target.GetComponent<Obj_State>().Alive = false;
         yield return new WaitForSeconds(2f);
         if(Target.tag != "Player")
@@ -33,7 +33,7 @@ public class Obj_Function:MonoBehaviour
             yield return null;
         Target.GetComponent<Animator>().SetBool("Def", true);
         Target.GetComponent<Obj_State>().Atk_Time = 0f;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         Target.GetComponent<Animator>().SetBool("Def", false);
     }
 }
