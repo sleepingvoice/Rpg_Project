@@ -470,6 +470,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3132393198386544470}
   - component: {fileID: 3042818308501295120}
+  - component: {fileID: 1128938454329951504}
+  - component: {fileID: 1462413602334201227}
+  - component: {fileID: 6204851966924882815}
   m_Layer: 0
   m_Name: Bunny_Black
   m_TagString: Untagged
@@ -486,7 +489,7 @@ Transform:
   m_GameObject: {fileID: 3129376282954744988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.438889, y: 0.945, z: -10.5711155}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 3127678748727784510}
   - {fileID: 3132389844208081238}
@@ -518,6 +521,59 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &1128938454329951504
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3129376282954744988}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &1462413602334201227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3129376282954744988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612ee59e7731b9b4d94e436b84b4c0cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 0
+  Mp: 0
+  Atk: 0
+  Def: 0
+  Atk_Speed: 0
+  Atk_Time: 0
+  Alive: 1
+  Str: 10
+  Dex: 10
+  Int: 10
+  Luk: 10
+--- !u!114 &6204851966924882815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3129376282954744988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30422f3cca7a2c498a71924dc48c2f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed_rotate: 400
+  Speed_move: 1
+  ResapwnTime: 10
+  Wait_Time: 5
 --- !u!1 &3129383520314921452
 GameObject:
   m_ObjectHideFlags: 0

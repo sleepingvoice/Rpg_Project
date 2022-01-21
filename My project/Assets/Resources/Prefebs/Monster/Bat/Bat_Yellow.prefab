@@ -101,6 +101,8 @@ GameObject:
   - component: {fileID: 7034628579105946759}
   - component: {fileID: 7034628579115488109}
   - component: {fileID: 1109852964}
+  - component: {fileID: 1788292064658131423}
+  - component: {fileID: 7669586035456977519}
   m_Layer: 9
   m_Name: Bat_Yellow
   m_TagString: Monster
@@ -165,10 +167,49 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: 1.5
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &1788292064658131423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7034628579105972391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612ee59e7731b9b4d94e436b84b4c0cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 0
+  Mp: 0
+  Atk: 0
+  Def: 0
+  Atk_Speed: 0
+  Atk_Time: 0
+  Alive: 1
+  Str: 10
+  Dex: 10
+  Int: 10
+  Luk: 10
+--- !u!114 &7669586035456977519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7034628579105972391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30422f3cca7a2c498a71924dc48c2f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResapwnTime: 10
+  Speed_rotate: 400
+  Speed_move: 1
+  Wait_Time: 5
 --- !u!1 &7034628579105972393
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,4 +29,10 @@ public class Obj_State : MonoBehaviour
         Atk_Speed = Dex * 10;
         Alive = true;
     }
+
+    public void spawn()
+    {
+        Hp = MaxHp;
+        Mp = MaxMp;
+    }
 }

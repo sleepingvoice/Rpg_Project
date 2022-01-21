@@ -7,9 +7,10 @@ public class GameManager : MonoBehaviour
     private static GameManager instance = null;
 
     public Camera mainCam;
-    public Obj_Function Obj_Fun;
     public GameObject Player;
     public Vector3 TargetPos;
+
+    [HideInInspector]public Obj_Function Obj_Fun;
 
     private void Awake()
     {

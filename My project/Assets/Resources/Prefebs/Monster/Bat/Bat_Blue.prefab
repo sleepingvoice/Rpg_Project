@@ -565,6 +565,8 @@ GameObject:
   - component: {fileID: 8449670194935100547}
   - component: {fileID: 8449670194944088911}
   - component: {fileID: 1110621235}
+  - component: {fileID: 1110621238}
+  - component: {fileID: 270954999120777985}
   m_Layer: 9
   m_Name: Bat_Blue
   m_TagString: Monster
@@ -629,10 +631,49 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: 1.5
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &1110621238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449670194934606051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612ee59e7731b9b4d94e436b84b4c0cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 0
+  Mp: 0
+  Atk: 0
+  Def: 0
+  Atk_Speed: 0
+  Atk_Time: 0
+  Alive: 1
+  Str: 10
+  Dex: 10
+  Int: 10
+  Luk: 10
+--- !u!114 &270954999120777985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449670194934606051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30422f3cca7a2c498a71924dc48c2f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResapwnTime: 10
+  Speed_rotate: 400
+  Speed_move: 1
+  Wait_Time: 5
 --- !u!1 &8449670194934606053
 GameObject:
   m_ObjectHideFlags: 0

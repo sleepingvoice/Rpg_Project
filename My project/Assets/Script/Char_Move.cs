@@ -43,7 +43,7 @@ public class Char_Move : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Time.deltaTime * Speed_move);
             walk = true;
 
-            Rotate_Target(TargetPos, this.gameObject);
+            GameManager.Instance.Obj_Fun.Rotate_Target(TargetPos, this.gameObject, Speed_rotate);
         }
         else if(myAtk.now_fight && Atk_now)
         {
@@ -77,14 +77,6 @@ public class Char_Move : MonoBehaviour
             Attack_num = 0;
             ani.SetInteger("Attack", 0);
         }
-    }
-
-    private void Rotate_Target(Vector3 targetPos, GameObject Obj) // 타겟 방향으로 회전
-    {
-        Vector3 dir = targetPos - Obj.transform.position;
-        dir.y = 0f;
-        Quaternion targetRot = Quaternion.LookRotation(dir);
-        Obj.GetComponent<Rigidbody>().rotation = Quaternion.RotateTowards(Obj.transform.rotation, targetRot, Speed_rotate * Time.deltaTime);
     }
 
 }
