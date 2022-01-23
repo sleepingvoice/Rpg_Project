@@ -7,8 +7,10 @@ public class Mon_Move : MonoBehaviour
     public float Speed_rotate;  // 회전속도
     public float Speed_move;    // 이동속도
 
-    public float ResapwnTime;   // 리젠시간
+
     public float Wait_Time;     // 회전 후 대기시간
+
+    [HideInInspector] public bool AttackAble = false;    // 공격이 가능한지 아닌지 체크
 
     private Vector3 TargetMove; // 이동할 지점
     private float Time_Check;   // 대기시간 체크
@@ -21,10 +23,13 @@ public class Mon_Move : MonoBehaviour
 
     private void Update()
     {
-        Mob_Move();
+        if (!AttackAble)
+            Mob_Move_Idle();
+        else
+            Mob_Move_Fight();
     }
 
-    private void Mob_Move()
+    private void Mob_Move_Idle()
     {
         float dis = Vector3.Distance(transform.position, TargetMove);
         if (dis < 0.01f)
@@ -38,25 +43,31 @@ public class Mon_Move : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, TargetMove, Time.deltaTime * Speed_move);
             GameManager.Instance.Obj_Fun.Rotate_Target(TargetMove, transform.gameObject, Speed_rotate);
-         }
+        }
     }
 
-    public void Die_Active()
+    private void Mob_Move_Fight()
     {
-        StartCoroutine(Die());
+        Mon_Attack myAttack = GetComponent<Mon_Attack>();
+        if (myAttack == null)
+            return;
+        else if (myAttack.Player == null)
+            return;
+
+        float dis = Vector3.Distance(transform.position, myAttack.Player.transform.position);
+        if(dis > 0.5f)
+        {
+            TargetMove = myAttack.Player.transform.position;
+            transform.position = Vector3.MoveTowards(transform.position, TargetMove, Time.deltaTime * Speed_move);
+            GameManager.Instance.Obj_Fun.Rotate_Target(TargetMove, transform.gameObject, Speed_rotate);
+        }
+        else
+        {
+            myAttack.Monster_Attack();
+            GameManager.Instance.Obj_Fun.Rotate_Target(TargetMove, transform.gameObject, Speed_rotate);
+        }
     }
 
-    private IEnumerator Die()
-    {
-        gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(ResapwnTime);
-
-        GetComponent<Animator>().SetTrigger("Spawn");
-        transform.position = GetComponentInParent<Mon_Spawn>().Return_RandomPos(); // 생성위치를 랜덤하게 바꿈
-        gameObject.SetActive(true);
-        GetComponent<Obj_State>().spawn();
-    }
 
 
 }

@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Obj_Function:MonoBehaviour
 {
-    public void Attack(GameObject Target,float Damge)
+    public void Attack(GameObject Target,GameObject Attacker)
     {
         Obj_State State = Target.GetComponent<Obj_State>();
         if (State != null)
         {
-            State.Hp -= Damge;
+            State.Hp -= Attacker.GetComponent<Obj_State>().Atk;
             if (State.Hp <= 0)
+            {
                 StartCoroutine(Die(Target));
+                Kill(Attacker);
+            }
             else
                 StartCoroutine(Demaged(Target));
         }
@@ -25,16 +28,28 @@ public class Obj_Function:MonoBehaviour
         Target.GetComponent<Obj_State>().Alive = false;
         yield return new WaitForSeconds(2f);
         if (Target.tag == "Monster")
-            Target.GetComponent<Mon_Move>().Die_Active();
+            Target.GetComponentInParent<Mon_Spawn>().StartCoroutine("Die_Respawn",Target);
     }
     IEnumerator Demaged(GameObject Target)
     {
         if (Target.GetComponent<Animator>() == null)
             yield return null;
-        Target.GetComponent<Animator>().SetBool("Def", true);
-        Target.GetComponent<Obj_State>().Atk_Time = 0f;
-        yield return new WaitForSeconds(1f);
-        Target.GetComponent<Animator>().SetBool("Def", false);
+        Target.GetComponent<Animator>().SetTrigger("Def");
+    }
+
+    public void Kill(GameObject Attacker)
+    {
+        if(Attacker.tag == "Player")
+        {
+            Attacker.GetComponent<Char_Move>().Monster_Kill();
+        }
+        else if(Attacker.tag == "Monster")
+        {
+            Attacker.GetComponent<Mon_Attack>().Player = null;
+            Attacker.GetComponent<Mon_Attack>().Attack_delay = 0f;
+            Attacker.GetComponent<Mon_Move>().AttackAble = false;
+            Attacker.GetComponent<Obj_State>().spawn();
+        }
     }
 
     public void Rotate_Target(Vector3 targetPos, GameObject Obj, float Speed_rotate) // 타겟 방향으로 회전
@@ -44,4 +59,6 @@ public class Obj_Function:MonoBehaviour
         Quaternion targetRot = Quaternion.LookRotation(dir);
         Obj.transform.rotation = Quaternion.RotateTowards(Obj.transform.rotation, targetRot, Speed_rotate * Time.deltaTime);
     }
+
+
 }

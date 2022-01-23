@@ -114,6 +114,8 @@
     <Compile Include="Assets\Script\Char_Attack.cs" />
     <Compile Include="Assets\Script\Char_Move.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
+    <Compile Include="Assets\Script\Mon_Attack.cs" />
+    <Compile Include="Assets\Script\Mon_AttackRange.cs" />
     <Compile Include="Assets\Script\Mon_Move.cs" />
     <Compile Include="Assets\Script\Mon_Spawn.cs" />
     <Compile Include="Assets\Script\Obj_Function.cs" />

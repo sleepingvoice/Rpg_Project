@@ -36,9 +36,8 @@ public class Char_Attack : MonoBehaviour
     {
         nearMonster = Char_function.Click_Obj(GameManager.Instance.TargetPos, "Monster");
 
-        if(nearMonster!=null)
+        if (nearMonster != null)
         {
-            
             now_fight = true;
 
 
@@ -60,13 +59,15 @@ public class Char_Attack : MonoBehaviour
     {
         Attack_delay = 0f;
         Delay += delayTime;
-        GameManager.Instance.Obj_Fun.Attack(nearMonster, my_state.Atk);
+        GameManager.Instance.Obj_Fun.Attack(nearMonster, transform.gameObject);
+        nearMonster.GetComponent<Mon_Attack>().Player = transform.gameObject;
+        nearMonster.GetComponent<Mon_Move>().AttackAble = true;
+        nearMonster.GetComponent<Mon_Attack>().FirstDelay();
 
         if (GetComponent<Char_Move>().Attack_num < 3)
             GetComponent<Char_Move>().Attack_num++;
         else
             GetComponent<Char_Move>().Attack_num = 1;
-
     }
 
     private void delayTime()

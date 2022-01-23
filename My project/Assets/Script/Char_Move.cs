@@ -33,12 +33,11 @@ public class Char_Move : MonoBehaviour
     {
         if (TargetPos == transform.position)
             return;
-
         dis = Vector3.Distance(TargetPos, transform.position);
         walk = false;
         Atk_now = myAtk.Player_AttackCheck();
 
-        if (dis>0.5f || (dis >= 0.01f && !myAtk.now_fight))
+        if (dis>0.5f || (dis >= 0.1f && !myAtk.now_fight))
         {
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Time.deltaTime * Speed_move);
             walk = true;
@@ -52,6 +51,14 @@ public class Char_Move : MonoBehaviour
         
 
         Change_Ani();
+    }
+
+    public void Monster_Kill()
+    {
+        Atk_now = false;
+        myAtk.now_fight = false;
+        walk = false;
+        GameManager.Instance.TargetPos = transform.position;
     }
 
     private void Change_Ani()  // 애니메이션 변경

@@ -6,10 +6,11 @@ public class Mon_Spawn : MonoBehaviour
 {
     public float Correct_y;
     public float ReSpawnTime;
+
     [SerializeField]private string Folder_Name;
     private BoxCollider Range_Col;
     private GameObject[] Monster_Prefeb;
-    
+    private List<GameObject> Monster_Die = new List<GameObject>();
 
     private void Awake()
     {
@@ -42,9 +43,23 @@ public class Mon_Spawn : MonoBehaviour
             {
                 Vector3 Pos = Return_RandomPos();
                 GameObject Prefeb = Instantiate(Monster_Prefeb[i], Pos, Quaternion.Euler(0, 180f, 0), transform);
-                Prefeb.GetComponent<Mon_Move>().ResapwnTime = ReSpawnTime;
                 Prefeb.GetComponent<Obj_State>().spawn();
             }
         }
+    }
+
+    public IEnumerator Die_Respawn(GameObject DieMonster)
+    {
+        Monster_Die.Add(DieMonster);
+        DieMonster.SetActive(false);
+        
+        yield return new WaitForSeconds(ReSpawnTime);
+
+        DieMonster.GetComponent<Animator>().SetTrigger("Spawn");
+        DieMonster.transform.position = GetComponentInParent<Mon_Spawn>().Return_RandomPos(); // 생성위치를 랜덤하게 바꿈
+        DieMonster.gameObject.SetActive(true);
+        DieMonster.GetComponent<Obj_State>().spawn();
+        DieMonster.GetComponent<Mon_Attack>().Attack_delay = 0f;
+        Monster_Die.RemoveAt(0);
     }
 }

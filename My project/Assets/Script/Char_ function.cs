@@ -6,12 +6,13 @@ public class Char_function : MonoBehaviour
 {
     public static void MousePos(Vector3 StartPos, ref Vector3 TargetPos)
     {
-            Ray ray = GameManager.Instance.mainCam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 10000f))
-            {
-                TargetPos = PosCorrect(StartPos, hit.point);
-            }
+        int layerMask = 1 << LayerMask.NameToLayer("Wall");
+        Ray ray = GameManager.Instance.mainCam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 10000f, layerMask))
+        {
+            TargetPos = PosCorrect(StartPos, hit.point);
+        }
     }
 
     private static Vector3 PosCorrect(Vector3 StartPos ,Vector3 TargetPos)
@@ -25,8 +26,10 @@ public class Char_function : MonoBehaviour
 
         if (Physics.Raycast(StartPos, Dir, out hit, Dis))
         {
-            if (hit.transform.gameObject.tag != "Monster")
+            if (hit.transform.gameObject.layer == 10)
+            {
                 return CorrectPos(StartPos, hit.transform.position);
+            }
         }
         return TargetPos;
     }
@@ -61,4 +64,5 @@ public class Char_function : MonoBehaviour
         }
         return nearObj;
     }
+
 }
