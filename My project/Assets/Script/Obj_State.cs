@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class Obj_State : MonoBehaviour
 {
-    public float Hp; // 체력
-    public float Mp; // 마력
-    public float Atk;// 공격
-    public float Def;// 방어
-    public float Atk_Speed;//공속
-    public float Atk_Time; //공격시간
-    public bool Alive;     //생존유무
+    [HideInInspector] public float Hp; // 체력
+    [HideInInspector] public float Mp; // 마력
+    [HideInInspector] public float Atk;// 공격
+    [HideInInspector] public float Def;// 방어
+    [HideInInspector] public float Atk_Speed;//공속
+    [HideInInspector] public float Atk_Time; //공격시간
+    [HideInInspector] public bool Alive;     //생존유무
 
     private float MaxHp;
     private float MaxMp;
 
-    public float Str;// 힘
-    public float Dex;// 민
-    public float Int;// 지
-    public float Luk;// 운
+    [Header("레벨")]
+    public int Exp;        // 경험치
+    public int Lv;         // 레벨
+
+    [Header("능력치")]
+    public float Str;      // 힘
+    public float Dex;      // 민
+    public float Int;      // 지
+    public float Luk;      // 운
 
     private void Awake()
     {

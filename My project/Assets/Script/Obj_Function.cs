@@ -13,7 +13,7 @@ public class Obj_Function:MonoBehaviour
             if (State.Hp <= 0)
             {
                 StartCoroutine(Die(Target));
-                Kill(Attacker);
+                Kill(Attacker,Target);
             }
             else
                 StartCoroutine(Demaged(Target));
@@ -37,11 +37,12 @@ public class Obj_Function:MonoBehaviour
         Target.GetComponent<Animator>().SetTrigger("Def");
     }
 
-    public void Kill(GameObject Attacker)
+    public void Kill(GameObject Attacker,GameObject Target)
     {
         if(Attacker.tag == "Player")
         {
             Attacker.GetComponent<Char_Move>().Monster_Kill();
+            Attacker.GetComponent<Obj_State>().Exp += Target.GetComponent<Obj_State>().Exp;
         }
         else if(Attacker.tag == "Monster")
         {
