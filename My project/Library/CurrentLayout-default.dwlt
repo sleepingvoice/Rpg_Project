@@ -96,7 +96,7 @@ MonoBehaviour:
   m_MinSize: {x: 911, y: 442}
   m_MaxSize: {x: 22006, y: 10021}
   vertical: 0
-  controlID: 76
+  controlID: 129
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 442}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 106
+  controlID: 130
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -162,8 +162,8 @@ MonoBehaviour:
     y: 0
     width: 202
     height: 731
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -411,9 +411,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 94af0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6e79fdffec7afdffd88afdff9eebfdffe801feff8c04feff1409feff5810feff5a14feff1833feff3837feff54d2feffbed3feffd2d4feffe6d5feff4ad8feffb8d8feffccd9feff2cdcfeffd8defeffdcdffeff22e1feff8ce2feffa0e3feffa4e4feff08e6feff1ce7feffb2e8feff8260ffff9460ffff3875ffff64a2ffff8abcffff64fbffffbc4c0300
+      m_ExpandedIDs: 46c3ffff64fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: LevelUp
@@ -424,7 +424,7 @@ MonoBehaviour:
           y: 0
           width: 0
           height: 0
-        m_UserData: -176196
+        m_UserData: -15546
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -513,8 +513,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders:
-    - Assets/Resources/Prefebs/Effect
+    m_Folders: []
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -526,7 +525,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: e4330000
     m_LastClickedID: 13284
-    m_ExpandedIDs: 00000000ee62000070640000726400007464000076640000786400007a6400007c6400007e64000080640000826400008464000086640000886400008a6400008c6400008e64000090640000926400009464000096640000986400009a640000
+    m_ExpandedIDs: 0000000026630000a8640000aa640000ac640000ae640000b0640000b2640000b4640000b6640000b8640000ba640000bc640000be640000c0640000c2640000c4640000c6640000c8640000ca640000cc640000ce640000d0640000d2640000d4640000d6640000d8640000da640000dc640000de640000e0640000e2640000e4640000e6640000e8640000ea640000ec640000ee640000f0640000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -554,18 +553,18 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000ee620000706400007464000076640000786400007a6400007c6400007e640000806400008264000084640000886400008c6400008e640000906400009264000094640000986400009a640000b2640000d26d0000f86d0000146e00001c6e0000226e0000366e0000446e00009c8b00005cbc0000bcbc00006cbd00008cbd0000a0bd0000b2bd0000ccbd000006be000024be000054be0000
+    m_ExpandedIDs: ffffffff0000000026630000a8640000aa640000ac640000ae640000b0640000b2640000b4640000b6640000b8640000ba640000c2640000c6640000c8640000ca640000cc640000d0640000d2640000d4640000d6640000da640000dc640000e0640000e2640000e4640000e8640000ea6400006a6f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: etfx_explosions
-      m_OriginalName: etfx_explosions
+      m_Name: Cartoon FX Easy Editor
+      m_OriginalName: Cartoon FX Easy Editor
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 48480
+      m_UserData: 31666
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -606,7 +605,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 2640}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 110
@@ -738,9 +737,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: 0, y: -0.30000007, z: 0.000000059604645}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: 0, y: -0.30000004, z: 0.000000059604638}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -788,11 +787,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.15551633, y: 0.5772062, z: -0.11310487, w: -0.7936433}
     speed: 2
-    m_Value: {x: -0.14701293, y: 0.5795499, z: -0.10725782, w: -0.7943581}
+    m_Value: {x: -0.15551518, y: 0.5772019, z: -0.11310404, w: -0.79363745}
   m_Size:
-    m_Target: 1.8446343
+    m_Target: 2
     speed: 2
-    m_Value: 1.5446343
+    m_Value: 1.7
   m_Ortho:
     m_Target: 0
     speed: 2

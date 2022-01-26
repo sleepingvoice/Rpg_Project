@@ -53,16 +53,6 @@
     <UnityVersion>2019.4.34f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Asset\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\PEButtonScript.cs" />
-    <Compile Include="Assets\Asset\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\PEDestoryTimed.cs" />
-    <Compile Include="Assets\Asset\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\ParticleEffectsLibrary.cs" />
-    <Compile Include="Assets\Asset\Epic Toon FX\Demo\ParticleEffectsShowcase\Scripts\UICanvasManager.cs" />
-    <Compile Include="Assets\Asset\Epic Toon FX\Demo\Scripts\ETFXButtonScript.cs" />
-    <Compile Include="Assets\Asset\Epic Toon FX\Demo\Scripts\ETFXFireProjectile.cs" />
-    <Compile Include="Assets\Asset\Epic Toon FX\Demo\Scripts\ETFXLoopScript.cs" />
-    <Compile Include="Assets\Asset\Epic Toon FX\Demo\Scripts\ETFXMouseOrbit.cs" />
-    <Compile Include="Assets\Asset\Epic Toon FX\Demo\Scripts\ETFXProjectileScript.cs" />
-    <Compile Include="Assets\Asset\Epic Toon FX\Demo\Scripts\ETFXSceneManager.cs" />
     <Compile Include="Assets\Asset\Epic Toon FX\Scripts\ETFXLightFade.cs" />
     <Compile Include="Assets\Asset\Epic Toon FX\Scripts\ETFXPitchRandomizer.cs" />
     <Compile Include="Assets\Asset\Epic Toon FX\Scripts\ETFXRotation.cs" />
@@ -137,7 +127,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\Surface2Sided_Shader.shader" />
-    <None Include="Assets\Asset\Epic Toon FX\Prefabs\Environment\Environment FX.txt" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
     <None Include="Assets\Asset\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\GrainGen.shader" />
@@ -169,7 +158,6 @@
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\Water_Shader.shader" />
     <None Include="Assets\Asset\Epic Toon FX\ETFX Readme.txt" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\Surface_Shader2.shader" />
-    <None Include="Assets\Asset\Epic Toon FX\Prefabs\Interactive\Interactive FX.txt" />
     <None Include="Assets\Asset\SD Citizen Characters - Volume01\Shaders\Sources\Shaders\Toony-Lighted.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Bluenoise64\LICENSE.txt" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\ACES.cginc" />
