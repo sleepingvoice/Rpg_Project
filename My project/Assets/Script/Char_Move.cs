@@ -16,6 +16,7 @@ public class Char_Move : MonoBehaviour
 
     private Char_Attack myAtk;
 
+
     private void Awake()
     {
         ani = GetComponent<Animator>();
@@ -37,7 +38,7 @@ public class Char_Move : MonoBehaviour
         walk = false;
         Atk_now = myAtk.Player_AttackCheck();
 
-        if (dis>0.5f || (dis >= 0.1f && !myAtk.now_fight))
+        if (dis>0.5f || (dis >= 0.05f && !myAtk.now_fight))
         {
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Time.deltaTime * Speed_move);
             walk = true;
@@ -47,6 +48,10 @@ public class Char_Move : MonoBehaviour
         else if(myAtk.now_fight && Atk_now)
         {
             myAtk.Player_Attack();
+        }
+        else if(dis < 0.05f && !myAtk.now_fight)
+        {
+            transform.position = TargetPos;
         }
         
 
@@ -85,5 +90,7 @@ public class Char_Move : MonoBehaviour
             ani.SetInteger("Attack", 0);
         }
     }
+
+
 
 }

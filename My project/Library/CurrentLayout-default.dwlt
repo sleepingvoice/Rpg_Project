@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Hierarchy
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 492}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -93,10 +93,10 @@ MonoBehaviour:
     y: 30
     width: 1536
     height: 731
-  m_MinSize: {x: 911, y: 442}
-  m_MaxSize: {x: 22006, y: 10021}
+  m_MinSize: {x: 908, y: 442}
+  m_MaxSize: {x: 22003, y: 10021}
   vertical: 0
-  controlID: 129
+  controlID: 41
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 442}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 130
+  controlID: 42
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -214,8 +214,8 @@ MonoBehaviour:
     y: 0
     width: 276
     height: 731
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -240,8 +240,8 @@ MonoBehaviour:
     y: 0
     width: 826
     height: 274
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -268,8 +268,8 @@ MonoBehaviour:
     y: 274
     width: 826
     height: 457
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -413,18 +413,18 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 46c3ffff64fbffff
+      m_ExpandedIDs: 64fbffff62430000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: LevelUp
-        m_OriginalName: LevelUp
+        m_Name: Click_Effect
+        m_OriginalName: Click_Effect
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -15546
+        m_UserData: -85348
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -513,7 +513,8 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/Resources/Prefebs/Effect
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -525,7 +526,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: e4330000
     m_LastClickedID: 13284
-    m_ExpandedIDs: 0000000026630000a8640000aa640000ac640000ae640000b0640000b2640000b4640000b6640000b8640000ba640000bc640000be640000c0640000c2640000c4640000c6640000c8640000ca640000cc640000ce640000d0640000d2640000d4640000d6640000d8640000da640000dc640000de640000e0640000e2640000e4640000e6640000e8640000ea640000ec640000ee640000f0640000
+    m_ExpandedIDs: 0000000086630000086500000a6500000c6500000e65000010650000126500001465000016650000186500001a6500001c6500001e65000020650000226500002465000026650000286500002a6500002c6500002e65000030650000326500003465000036650000386500003a6500003c650000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -553,21 +554,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff0000000026630000a8640000aa640000ac640000ae640000b0640000b2640000b4640000b6640000b8640000ba640000c2640000c6640000c8640000ca640000cc640000d0640000d2640000d4640000d6640000da640000dc640000e0640000e2640000e4640000e8640000ea6400006a6f0000
+    m_ExpandedIDs: ffffffff0000000086630000086500000a6500000c6500000e65000010650000126500001465000016650000186500001a6500001c6500001e65000020650000226500002465000026650000286500002a6500002c6500002e65000030650000326500003465000036650000386500003a6500003c6500001e660000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Cartoon FX Easy Editor
-      m_OriginalName: Cartoon FX Easy Editor
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 31666
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
@@ -737,9 +738,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: -0.30000007, z: 0.000000059604645}
+    m_Target: {x: 5.845725, y: 0.51045823, z: 10.08578}
     speed: 2
-    m_Value: {x: 0, y: -0.30000004, z: 0.000000059604638}
+    m_Value: {x: 5.845725, y: 0.51045823, z: 10.08578}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -785,13 +786,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.15551633, y: 0.5772062, z: -0.11310487, w: -0.7936433}
+    m_Target: {x: -0.16425374, y: -0.0026576421, z: 0.00044141425, w: -0.98642457}
     speed: 2
-    m_Value: {x: -0.15551518, y: 0.5772019, z: -0.11310404, w: -0.79363745}
+    m_Value: {x: -0.1642521, y: -0.0026576156, z: 0.00044140982, w: -0.9864147}
   m_Size:
-    m_Target: 2
+    m_Target: 0.439493
     speed: 2
-    m_Value: 1.7
+    m_Value: 0.439493
   m_Ortho:
     m_Target: 0
     speed: 2

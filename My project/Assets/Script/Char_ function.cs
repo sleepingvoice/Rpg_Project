@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Char_function : MonoBehaviour
 {
+
     public static void MousePos(Vector3 StartPos, ref Vector3 TargetPos)
     {
         int layerMask = 1 << LayerMask.NameToLayer("Wall");
