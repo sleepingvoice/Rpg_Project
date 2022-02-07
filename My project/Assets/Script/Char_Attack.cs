@@ -10,8 +10,9 @@ public class Char_Attack : MonoBehaviour
     private Obj_State my_state;     // 나의 상태창 가져오기
     private Action Delay;           // 딜레이 업데이트에 돌리는용도
     private GameObject nearMonster; // 공격 대상 몬스터
-    public bool now_fight;         // 전투중인지 아닌지 판단
+    public bool now_fight;          // 전투중인지 아닌지 판단
 
+    public GameObject Monster { get { return nearMonster; } }
 
     private void Awake()
     {

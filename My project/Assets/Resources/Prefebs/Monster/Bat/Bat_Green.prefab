@@ -529,6 +529,10 @@ MonoBehaviour:
   Atk_Speed: 0
   Atk_Time: 10
   Alive: 1
+  Name: Green_Bat
+  Exp: 0
+  Lv: 0
+  total_Exp: 0
   Str: 1
   Dex: 1
   Int: 1
@@ -547,7 +551,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed_rotate: 400
   Speed_move: 1
-  ResapwnTime: 10
   Wait_Time: 5
   AttackAble: 0
 --- !u!114 &4004828717447492778

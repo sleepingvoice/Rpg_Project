@@ -116,7 +116,6 @@
     <Compile Include="Assets\Script\Char_Animation.cs" />
     <Compile Include="Assets\Script\Char_Attack.cs" />
     <Compile Include="Assets\Script\Char_Move.cs" />
-    <Compile Include="Assets\Script\Char_State.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\Mon_Attack.cs" />
     <Compile Include="Assets\Script\Mon_AttackRange.cs" />
@@ -124,6 +123,8 @@
     <Compile Include="Assets\Script\Mon_Spawn.cs" />
     <Compile Include="Assets\Script\Obj_Function.cs" />
     <Compile Include="Assets\Script\Obj_State.cs" />
+    <Compile Include="Assets\Script\UI_BarContent.cs" />
+    <Compile Include="Assets\Script\UI_Manager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\Surface2Sided_Shader.shader" />
@@ -737,6 +738,9 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
@@ -748,9 +752,6 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

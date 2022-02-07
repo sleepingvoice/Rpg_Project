@@ -10,6 +10,7 @@ public class Obj_Function:MonoBehaviour
         if (State != null)
         {
             State.Hp -= Attacker.GetComponent<Obj_State>().Atk;
+            State.Health_Map["Hp"] = State.Hp;
             if (State.Hp <= 0)
             {
                 StartCoroutine(Die(Target));
