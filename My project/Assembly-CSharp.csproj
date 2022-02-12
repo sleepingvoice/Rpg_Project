@@ -112,6 +112,7 @@
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
     <Compile Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Scripts\EnableCameraDepthInForward.cs" />
+    <Compile Include="Assets\Register.cs" />
     <Compile Include="Assets\Script\Char_ function.cs" />
     <Compile Include="Assets\Script\Char_Animation.cs" />
     <Compile Include="Assets\Script\Char_Attack.cs" />
@@ -123,6 +124,8 @@
     <Compile Include="Assets\Script\Mon_Spawn.cs" />
     <Compile Include="Assets\Script\Obj_Function.cs" />
     <Compile Include="Assets\Script\Obj_State.cs" />
+    <Compile Include="Assets\Script\SQL_Connect.cs" />
+    <Compile Include="Assets\Script\Test_Server.cs" />
     <Compile Include="Assets\Script\UI_BarContent.cs" />
     <Compile Include="Assets\Script\UI_Manager.cs" />
   </ItemGroup>
