@@ -9,8 +9,9 @@ public class Register : MonoBehaviour
 	public Text Id;
 	public Text PassWord;
 	public Button signup;
-
+	
 	private string User_code;
+	private string Normal_Url = "http://localhost/Test/";
 
 	private void Awake()
     {
@@ -19,7 +20,7 @@ public class Register : MonoBehaviour
 
 	public void RegisterBtk()
     {
-		if(Id.text != null && PassWord.text != null)
+		if(Id.text != "" && PassWord.text != "")
         {
 			StartCoroutine(Register_ID());
 		}
@@ -27,7 +28,7 @@ public class Register : MonoBehaviour
 
 	IEnumerator Register_ID()
     {
-		UnityWebRequest CheckCode = UnityWebRequest.Get("http://localhost/Test/RegisterCheck.php");
+		UnityWebRequest CheckCode = UnityWebRequest.Get(Normal_Url + "RegisterCheck.php");
 
 		yield return CheckCode.SendWebRequest();
 
@@ -44,17 +45,23 @@ public class Register : MonoBehaviour
 			User_code = code.ToString("000000");
 		}
 
-		WWWForm form = new WWWForm();
-		form.AddField("ID_Post", Id.text);
-		form.AddField("PassWord_Post", PassWord.text);
-		form.AddField("User_code_Post", User_code);
-		UnityWebRequest www = UnityWebRequest.Post("http://localhost/Test/register.php", form);
+		WWWForm IDform = new WWWForm();
+		IDform.AddField("ID_Post", Id.text);
+		IDform.AddField("PassWord_Post", PassWord.text);
+		IDform.AddField("User_code_Post", User_code);
 
-		yield return www.SendWebRequest();
+        UnityWebRequest www = UnityWebRequest.Post(Normal_Url + "register.php", IDform);
 
-		if (www.error == null)
-			Debug.Log("성공했습니다.");
-		else
-			Debug.Log("실패했습니다.");
+        yield return www.SendWebRequest();
+
+		Debug.Log(CheckResult(www.downloadHandler.text));
+	}
+
+	private string CheckResult(string s)
+    {
+		string st1 = s.Replace("\n", "");
+		st1 = st1.Replace("\r", "");
+
+		return st1;
 	}
 }
