@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Item_Code;
 using System.IO;
+using System.Threading.Tasks;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -18,9 +17,25 @@ public class UI_Inventory : MonoBehaviour
 
     private void Awake()
     {
-        Load_Inventory();
         Check_Code();
-        reload_Inventory();
+        InventoryLoding();
+    }
+
+
+    public void Test()
+    {
+        
+    }
+
+    private async void InventoryLoding()
+    {
+        while (true)
+        {
+            Load_Inventory();
+            reload_Inventory();
+            await Task.Delay(60000); //60초마다 세이브 로드를 반복
+            Save_Inventory();
+        }
     }
 
     private void Load_Inventory()
@@ -46,7 +61,21 @@ public class UI_Inventory : MonoBehaviour
 
     private void Save_Inventory()
     {
-        File.WriteAllText(Application.dataPath + "/Resources/Inventory.json", JsonUtility.ToJson(Inven));
+        bool b = true;
+        for (int i = 0;i< Inven.Inventory.Count;i++)
+        {
+            if (Inven.Inventory[i].Item_Code != Find_Item_Code(Icons[i].texture.name)) // UI의 코드가 저장된 데이터의 코드와 다를경우
+            {
+                Inven.Inventory[i].Item_Code = Find_Item_Code(Icons[Inven.Inventory[i].Order].texture.name);
+                b = false;   // 한번이라도 값이 바뀐적이 있다면 false 값이 나온다.
+            }
+        }
+
+        if (!b)
+        {
+            Debug.Log("저장중...");
+            File.WriteAllText(Application.dataPath + "/Resources/Inventory.json", JsonUtility.ToJson(Inven)); // Json을 현재 상태로 바꾸고 Josn에 저장
+        }
     }
 
 
@@ -84,6 +113,9 @@ public class UI_Inventory : MonoBehaviour
         return Resources.Load<Texture>("Icon" + Route);
     }
 
+    /// <summary>
+    /// 아이템 코드로 텍스쳐 경로 찾는 함수
+    /// </summary>
     private string Find_Item_Route(string Name)
     {
         string s = "";
@@ -134,5 +166,25 @@ public class UI_Inventory : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 텍스쳐 이름으로 아이템 코드 찾는 함수
+    /// </summary>
+    private string Find_Item_Code(string Name)
+    {
+        if(Name == Black.name)
+        {
+            return "";
+        }
+        foreach (Data data in Big_Data.DataArray)
+        {
+            if(Name == data.PrefabName)
+            {
+                return data.Item_Code;
+            }
+        }
+
+        Debug.LogError("찾은 이름의 프리펩이 존재하지 않습니다.");
+        return null;
+    }
 
 }

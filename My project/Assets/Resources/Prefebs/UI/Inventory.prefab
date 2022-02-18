@@ -1,5 +1,76 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1119435345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119435346}
+  - component: {fileID: 1119435348}
+  - component: {fileID: 1119435347}
+  m_Layer: 5
+  m_Name: Empty_Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1119435346
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119435345}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6106760373735238556}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -121.182495, y: 19.381271}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1119435348
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119435345}
+  m_CullTransparentMesh: 0
+--- !u!114 &1119435347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119435345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 849d4950b3b7e401f991879d3fb824cc, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &2523749519388100246
 GameObject:
   m_ObjectHideFlags: 0
@@ -3498,6 +3569,7 @@ GameObject:
   - component: {fileID: 6106760373735238556}
   - component: {fileID: 6106760373735238546}
   - component: {fileID: 6106760373735238557}
+  - component: {fileID: 8627132054963452525}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -3512,13 +3584,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6106760373735238559}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 6106760373647331722}
   - {fileID: 6106760372364941853}
   - {fileID: 6106760373206762987}
+  - {fileID: 1119435346}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3564,3 +3637,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8627132054963452525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106760373735238559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a06de61dd1f77a429f9281aee4ecde6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Icons:
+  - {fileID: 2523749519961557651}
+  - {fileID: 2523749520972821530}
+  - {fileID: 2523749521012355044}
+  - {fileID: 2523749520197884821}
+  - {fileID: 2523749520553068742}
+  - {fileID: 2523749519942431476}
+  - {fileID: 2523749521288822522}
+  - {fileID: 2523749521371458498}
+  - {fileID: 2523749519523869290}
+  - {fileID: 2523749519422341349}
+  - {fileID: 2523749520733535514}
+  - {fileID: 2523749520783711224}
+  - {fileID: 2523749520847528514}
+  - {fileID: 2523749519746973230}
+  - {fileID: 2523749520388530698}
+  - {fileID: 2523749520355745125}
+  - {fileID: 2523749520690336764}
+  - {fileID: 2523749520987774538}
+  - {fileID: 2523749519425816621}
+  - {fileID: 2523749520807502940}
+  Black: {fileID: 2800000, guid: 849d4950b3b7e401f991879d3fb824cc, type: 3}

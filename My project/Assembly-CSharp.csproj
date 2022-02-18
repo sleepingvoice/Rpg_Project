@@ -129,6 +129,7 @@
     <Compile Include="Assets\Script\UI\UI_Inventory.cs" />
     <Compile Include="Assets\Script\UI\UI_ItemCodeBase.cs" />
     <Compile Include="Assets\Script\UI\UI_Manager.cs" />
+    <Compile Include="Assets\Script\UI\UI_Mouse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\Surface2Sided_Shader.shader" />
