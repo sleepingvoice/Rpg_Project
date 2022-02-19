@@ -126,6 +126,7 @@
     <Compile Include="Assets\Script\Object\Obj_Function.cs" />
     <Compile Include="Assets\Script\Object\Obj_State.cs" />
     <Compile Include="Assets\Script\UI\UI_BarContent.cs" />
+    <Compile Include="Assets\Script\UI\UI_Equip.cs" />
     <Compile Include="Assets\Script\UI\UI_Inventory.cs" />
     <Compile Include="Assets\Script\UI\UI_ItemCodeBase.cs" />
     <Compile Include="Assets\Script\UI\UI_Manager.cs" />

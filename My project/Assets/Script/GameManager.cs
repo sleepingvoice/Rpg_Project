@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,8 +9,9 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCam;
     public GameObject Player;
-    public Vector3 TargetPos;
+    public UI_Manager Ui_Manage;
 
+    [HideInInspector]public Vector3 TargetPos;
     [HideInInspector]public Obj_Function Obj_Fun;
 
     private GameObject Effect_Click;
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject()) // 오른쪽 마우스를 클릭하고 클릭한 위치에 UI가 없을때
         {
             Char_function.MousePos(Player.transform.position, ref TargetPos);
             StartCoroutine("Effect_Make", TargetPos);
