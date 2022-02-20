@@ -50,7 +50,7 @@ public class UI_Inventory : MonoBehaviour
             }
             else
             {
-                Icons[item.Order].texture = GameManager.Instance.Ui_Manage.Black;
+                Icons[item.Order].texture = GameManager.Instance.Ui_Manage.Black_Item;
             }
         }
     }

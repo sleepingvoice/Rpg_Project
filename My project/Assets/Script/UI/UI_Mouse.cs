@@ -8,18 +8,20 @@ using System;
 public class UI_Mouse : MonoBehaviour
 {
     public RawImage Empty_Icon; // 클릭시 마우스를 따라다닐 이미지
-    public Texture Empty_texture; // 클릭시 인벤토리 창을 바꿔줄 텍스쳐
+
 
     private UI_Manager myManager;
     private Action Chasing_Mouse;
     private GraphicRaycaster gr;
     private bool Chasing_Icon_now; // 아이콘이 마우스를 따라다니는 중인지 여부파악
+    private Texture Empty_texture; // 클릭시 인벤토리 창을 바꿔줄 텍스쳐
 
     private void Awake()
     {
         gr = GetComponent<GraphicRaycaster>();
         Chasing_Icon_now = false;
         myManager = GameManager.Instance.Ui_Manage;
+        Empty_texture = GameManager.Instance.Ui_Manage.Black_Item;
     }
 
     private void Update()
@@ -98,7 +100,9 @@ public class UI_Mouse : MonoBehaviour
         {
             foreach (RaycastResult result in Click_GUI_Check())
             {
-                if (result.gameObject.name == "Icon" && result.gameObject.GetComponent<RawImage>().texture != myManager.Black) //만약 오브젝트의 이름이 "Icon" 이고 클릭된 아이콘이 비어있지 않을경우
+                if (result.gameObject.name == "Icon" && result.gameObject.GetComponent<RawImage>().texture != Empty_texture) 
+                    //인벤토리의 아이템을 클릭할때
+                    //만약 오브젝트의 이름이 "Icon" 이고 클릭된 아이콘이 비어있지 않을경우
                 {
                     string s = myManager.Find_Item_Code(result.gameObject.GetComponent<RawImage>().texture.name); // Icon에 있는 텍스쳐의 Item_code를 찾아 넣는다.
                     RawImage Equip_Img = myManager.Manager_Equip.Change_Equip_Item(s);                            // Item_code를 통해 알맞은 장비창의 아이콘을 찾는다.
@@ -112,7 +116,7 @@ public class UI_Mouse : MonoBehaviour
                         }
                         else // 장비창이 빈 아이콘일때
                         {
-                            result.gameObject.GetComponent<RawImage>().texture = myManager.Black;
+                            result.gameObject.GetComponent<RawImage>().texture = myManager.Black_Equip;
                         }
                     }
                 }

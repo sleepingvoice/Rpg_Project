@@ -17,7 +17,8 @@ public class UI_Manager : MonoBehaviour
     private UI_Mouse Manager_Mouse;
 
     [Header("빈칸 이미지")]
-    public Texture Black;
+    public Texture Black_Item; // 인벤토리 빈칸 텍스쳐
+    public Texture Black_Equip; // 장비창 빈칸 텍스쳐
 
     private Database Big_Data;
 
@@ -168,7 +169,7 @@ public class UI_Manager : MonoBehaviour
     /// </summary>
     public string Find_Item_Code(string Name)
     {
-        if (Name == Black.name)
+        if (Name == Black_Item.name || Name == Black_Equip.name)
         {
             return "";
         }

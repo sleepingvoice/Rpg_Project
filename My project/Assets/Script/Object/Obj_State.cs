@@ -31,18 +31,27 @@ public class Obj_State : MonoBehaviour
     public float Int;      // 지
     public float Luk;      // 운
 
+    [HideInInspector] public float Plus_Atk; // 장비로 인해 올라가는 데미지
+    [HideInInspector] public float Plus_Def; // 장비로 인해 올라가는 방어력
     private void Awake()
     {
-        MaxHp = Str * 50;
-        MaxMp = Int * 50;
-        Atk = Str * 5;
-        Def = Luk * 5;
-        Atk_Speed = Dex * 10;
+        Plus_Atk = 0f;
+        Plus_Def = 0f;
         Alive = true;
+        State_renewal();
         Mapping();
     }
 
-    private void Mapping()
+    private void State_renewal()
+    {
+        MaxHp = Str * 50;
+        MaxMp = Int * 50;
+        Atk = Str * 5 + Plus_Atk;
+        Def = Luk * 5 + Plus_Def;
+        Atk_Speed = Dex * 10;
+    }
+
+    private void Mapping() // 맵핑함수
     {
         Health_Map = new Dictionary<string, float>();
         Health_Map.Add("MaxHp", MaxHp);
@@ -55,12 +64,24 @@ public class Obj_State : MonoBehaviour
         Health_Map.Add("Luk", Luk);
         Health_Map.Add("MaxExp", total_Exp);
         Health_Map.Add("Exp", Exp);
+        Health_Map.Add("Plus_Atk", Plus_Atk);
+        Health_Map.Add("Plus_Def", Plus_Def);
     }
 
-    public void spawn()
+    /// <summary>
+    /// 스탯을 갱신할때 사용하는 함수
+    /// </summary>
+    public void Roboot() 
+    {
+        State_renewal();
+        Mapping();
+    }
+
+    public void spawn() // 몬스터 스폰시 체력을 채워주고 값을 넣어준다.
     {
         Hp = MaxHp;
         Mp = MaxMp;
+        State_renewal();
         Mapping();
     }
 }

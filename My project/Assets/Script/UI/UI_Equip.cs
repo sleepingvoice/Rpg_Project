@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Item_Code;
 
 public class UI_Equip : MonoBehaviour
 {
@@ -68,5 +69,46 @@ public class UI_Equip : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// 장비창에 있는 아이템의 능력치를 추가해주는 함수(int가 1일시 더해주는것이고 -1일시 빼주는것이다.)
+    /// </summary>
+    public void Plus_Item_State(string Texture_name,int PlusMinus)
+    {
+        UI_Manager my_UI = GameManager.Instance.Ui_Manage;
+        string Code = my_UI.Find_Item_Code(Texture_name);
+        Data my_Item = my_UI.FindItem(Code);
+        if (my_Item.function != "")
+        {
+            List<string> item_function = Slide_String_function(my_Item.function);
+            int value = int.Parse(item_function[1]);
+            value *= PlusMinus;
+            Obj_State my_state = GameManager.Instance.Player.GetComponent<Obj_State>();
+            if (item_function[0] == "Atk")
+                my_state.Plus_Atk += value;
+            else if (item_function[0] == "Def")
+                my_state.Plus_Def += value;
+
+            my_state.Roboot();
+        }
+    }
+
+    private List<string> Slide_String_function(string s)
+    {
+        List<string> my_string = new List<string>();
+        string tmp = "";
+        for(int i=0;i<s.Length;i++)
+        {
+            if (s[i] != '_')
+            {
+                tmp += s[i];
+            }
+            else
+            {
+                my_string.Add(tmp);
+                tmp = "";
+            }
+        }
+        return my_string;
+    }
 
 }
