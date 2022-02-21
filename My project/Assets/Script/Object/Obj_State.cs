@@ -14,7 +14,7 @@ public class Obj_State : MonoBehaviour
                                              
     private float MaxHp;
     private float MaxMp;
-
+    
     [HideInInspector] public Dictionary<string, float> Health_Map;
 
     [Header("이름")]

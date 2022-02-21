@@ -7,8 +7,7 @@ using Item_Code;
 public class UI_Equip : MonoBehaviour
 {
     public RawImage[] Equip_Icons; // 장비창 아이콘
-    public GameObject[] Name;      // 장비창 이름
-    public Texture Blank_tex;      // 빈칸 텍스쳐
+    public Text[] Icons_Name;      // 장비창 아이콘 위의 이름
 
     [HideInInspector]public Dictionary<string, RawImage> Equip_Icons_Name; // 장비창 아이콘의 이름을 저장하는 맵변수
 
@@ -16,6 +15,18 @@ public class UI_Equip : MonoBehaviour
     private void Awake()
     {
         Mapping();
+    }
+
+    /// <summary>
+    /// 아이콘의 이름을 넣으면 그에 해당하는 이름 함수
+    /// </summary>
+    public void Hide_Icon_Name(string Icon_Name, bool b)
+    {
+        for(int i=0;i<Equip_Icons.Length;i++)
+        {
+            if (Equip_Icons[i].name == Icon_Name)
+                Icons_Name[i].gameObject.SetActive(b);
+        }
     }
 
     private void Mapping() // 맵변수에 값을 추가해준다.
@@ -27,21 +38,6 @@ public class UI_Equip : MonoBehaviour
         Equip_Icons_Name.Add("Weapon", Equip_Icons[3]);
         Equip_Icons_Name.Add("Gloves", Equip_Icons[4]);
     }
-
-    /// <summary>
-    /// 이름 없애는 함수
-    /// </summary>
-    public void Check_Name()
-    {
-        for(int i=0;i<Equip_Icons.Length;i++)
-        {
-            if(Equip_Icons[i].texture != Blank_tex)
-                Name[i].SetActive(false);
-            else
-                Name[i].SetActive(true);
-        }
-    }
-
 
     /// <summary>
     /// 아이템 코드에 따라 맞는 장비창의 이미지를 불러준다.
@@ -72,23 +68,22 @@ public class UI_Equip : MonoBehaviour
     /// <summary>
     /// 장비창에 있는 아이템의 능력치를 추가해주는 함수(int가 1일시 더해주는것이고 -1일시 빼주는것이다.)
     /// </summary>
-    public void Plus_Item_State(string Texture_name,int PlusMinus)
+    public void Plus_Item_State(string Item_Code,int PlusMinus)
     {
         UI_Manager my_UI = GameManager.Instance.Ui_Manage;
-        string Code = my_UI.Find_Item_Code(Texture_name);
-        Data my_Item = my_UI.FindItem(Code);
-        if (my_Item.function != "")
+        Data my_Item = my_UI.FindItem(Item_Code);
+        if (my_Item.function != "") // 만약 아이템의 효과가 비어있지 않다면
         {
-            List<string> item_function = Slide_String_function(my_Item.function);
+            List<string> item_function = Slide_String_function(my_Item.function); // 아이템 효과를 나눠준다(위치와 값)
             int value = int.Parse(item_function[1]);
-            value *= PlusMinus;
+            value *= PlusMinus; // 더하거나 빼는것을 모두 처리하기 위함
             Obj_State my_state = GameManager.Instance.Player.GetComponent<Obj_State>();
-            if (item_function[0] == "Atk")
+            if (item_function[0] == "Atk") // 효과가 공격에 들어갈시
                 my_state.Plus_Atk += value;
-            else if (item_function[0] == "Def")
+            else if (item_function[0] == "Def") // 효과가 방어에 들어갈시
                 my_state.Plus_Def += value;
 
-            my_state.Roboot();
+            my_state.Roboot(); // 추가된 데미지나 방어력을 갱신시켜준다.
         }
     }
 
@@ -108,7 +103,29 @@ public class UI_Equip : MonoBehaviour
                 tmp = "";
             }
         }
+        my_string.Add(tmp);
         return my_string;
     }
 
+    /// <summary>
+    /// 장비창의 무기에 따라 캐릭터가 들고있는 무기를 다르게 해주는 함수
+    /// 아이템 코드와 들어오는 장비창의 이름을 받는다.
+    /// </summary>
+    public void Change_Weapons(string Item_Code,string Equip_name)
+    {
+        if (Equip_name != "Weapon")
+            return;
+
+        UI_Manager my_UI = GameManager.Instance.Ui_Manage;
+        Data myWeapons = my_UI.FindItem(Item_Code);
+        Debug.Log(myWeapons.PrefabName);
+        foreach (GameObject obj in GameManager.Instance.Player.GetComponent<Char_Weapons>().myWeapons)
+        {
+            obj.SetActive(false);
+            if(obj.name == myWeapons.PrefabName)
+            {
+                obj.SetActive(true);
+            }
+        }
+    }
 }

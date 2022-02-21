@@ -8,7 +8,6 @@ public class UI_Inventory : MonoBehaviour
 {
     [Header("아이템 창")]
     public RawImage[] Icons;
-
     private Inventory_Items Inven;
 
     private void Awake()

@@ -43,6 +43,8 @@ public class UI_Mouse : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (Click_GUI_Check() == null)
+                return;
             foreach (RaycastResult result in Click_GUI_Check())
             {
                 if (result.gameObject.name == "Icon") // 만약 부딪힌 GUI에서 Icon이 존재할시에
@@ -98,26 +100,64 @@ public class UI_Mouse : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
+            if (Click_GUI_Check() == null)
+                return;
             foreach (RaycastResult result in Click_GUI_Check())
             {
-                if (result.gameObject.name == "Icon" && result.gameObject.GetComponent<RawImage>().texture != Empty_texture) 
-                    //인벤토리의 아이템을 클릭할때
-                    //만약 오브젝트의 이름이 "Icon" 이고 클릭된 아이콘이 비어있지 않을경우
+                if (result.gameObject.name == "Icon" && result.gameObject.GetComponent<RawImage>().texture != Empty_texture)
+                //인벤토리의 아이템을 클릭할때
+                //만약 오브젝트의 이름이 "Icon" 이고 클릭된 아이콘이 비어있지 않을경우
                 {
                     string s = myManager.Find_Item_Code(result.gameObject.GetComponent<RawImage>().texture.name); // Icon에 있는 텍스쳐의 Item_code를 찾아 넣는다.
                     RawImage Equip_Img = myManager.Manager_Equip.Change_Equip_Item(s);                            // Item_code를 통해 알맞은 장비창의 아이콘을 찾는다.
-                    if(Equip_Img != null) // 만약 알맞은 장비창이 존재할때
+                    if (Equip_Img != null) // 만약 알맞은 장비창이 존재할때
                     {
+                        myManager.Manager_Equip.Change_Weapons(s,Equip_Img.name);
+
                         Texture Tmp = Equip_Img.texture;
                         Equip_Img.texture = result.gameObject.GetComponent<RawImage>().texture;
-                        if (Tmp != myManager.Manager_Equip.Blank_tex) // 장비창이 빈아이콘이 아닐때
+                        myManager.Manager_Equip.Plus_Item_State(s, 1); // 아이템의 능력치를 추가해준다.
+                        if (Tmp != myManager.Black_Equip) // 장비창이 빈아이콘이 아닐때
                         {
                             result.gameObject.GetComponent<RawImage>().texture = Tmp;
+                            s = myManager.Find_Item_Code(Tmp.name);
+                            myManager.Manager_Equip.Plus_Item_State(s, -1); // 있던 아이템의 능력치를 빼준다.
                         }
                         else // 장비창이 빈 아이콘일때
                         {
-                            result.gameObject.GetComponent<RawImage>().texture = myManager.Black_Equip;
+                            result.gameObject.GetComponent<RawImage>().texture = myManager.Black_Item;
+                            myManager.Manager_Equip.Hide_Icon_Name(Equip_Img.name, false); // 장비창 아래의 이름을 지워준다
                         }
+
+                    }
+                    return;
+                }
+                Equip_Out(result.gameObject);
+            }
+        }
+    }
+    /// <summary>
+    /// 장비창에 있는 장비를 뺄때 사용하는 함수
+    /// </summary>
+    private void Equip_Out(GameObject Target)
+    {
+        foreach (RawImage Img in myManager.Manager_Equip.Equip_Icons)
+        {
+            if (Img.name == Target.name && Img.texture != myManager.Black_Equip)
+            {
+                string s = myManager.Find_Item_Code(Img.texture.name);
+                foreach (RawImage raw in myManager.Manager_Inven.Icons)
+                {
+                    Debug.Log("들어옴");
+                    if (raw.texture == myManager.Black_Item)
+                    {
+
+                        Texture tmp = Img.texture;
+                        Img.texture = myManager.Black_Equip;
+                        myManager.Manager_Equip.Plus_Item_State(s, -1); // 장비창에 끼고있는 아이템의 능력치를 빼준다.
+                        myManager.Manager_Equip.Hide_Icon_Name(Img.name, true);
+                        raw.texture = tmp;
+                        return;
                     }
                 }
             }
