@@ -58,8 +58,11 @@ public class Obj_Function:MonoBehaviour
     {
         Vector3 dir = targetPos - Obj.transform.position;
         dir.y = 0f;
-        Quaternion targetRot = Quaternion.LookRotation(dir);
-        Obj.transform.rotation = Quaternion.RotateTowards(Obj.transform.rotation, targetRot, Speed_rotate * Time.deltaTime);
+        if (dir != Vector3.zero)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(dir);
+            Obj.transform.rotation = Quaternion.RotateTowards(Obj.transform.rotation, targetRot, Speed_rotate * Time.deltaTime);
+        }
     }
 
 

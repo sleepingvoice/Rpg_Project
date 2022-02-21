@@ -11,10 +11,12 @@ public class UI_Mouse : MonoBehaviour
 
 
     private UI_Manager myManager;
-    private Action Chasing_Mouse;
+    private Action Chasing_Icon;    // 아이콘이 따라다니는 액션
+    private Action Chasing_Windows; // 윈도우가 따라다니는 액션
     private GraphicRaycaster gr;
     private bool Chasing_Icon_now; // 아이콘이 마우스를 따라다니는 중인지 여부파악
     private Texture Empty_texture; // 클릭시 인벤토리 창을 바꿔줄 텍스쳐
+    private Vector3 mousePos;      // 처음 클릭시 마우스의 위치
 
     private void Awake()
     {
@@ -27,15 +29,25 @@ public class UI_Mouse : MonoBehaviour
     private void Update()
     {
         Click_Event();
-        if (Chasing_Mouse != null)
-            Chasing_Mouse();
+        Chasing();
+    }
+    
+    private void Chasing()
+    {
+        if (Chasing_Icon != null)
+            Chasing_Icon();
+        if (Chasing_Windows != null)
+            Chasing_Windows();
     }
 
     private void Click_Event()
     {
         Click_left_Inventory();
         Click_Right_Inventory();
+        Holding_Left_Mouse();
     }
+
+    #region 왼쪽마우스클릭{
     /// <summary>
     /// 인벤토리가 비어있지 않은상태에서 마우스 왼쪽 클릭시 아이템이 마우스를 따라다니게되는 함수
     /// </summary>
@@ -62,7 +74,7 @@ public class UI_Mouse : MonoBehaviour
                             result.gameObject.GetComponent<RawImage>().texture = Empty_Icon.texture; // 비어있는 아이콘에 따라다니는 아이콘의 텍스쳐를 넣어준다
                             Empty_Icon.texture = Empty_texture;
                             Empty_Icon.gameObject.SetActive(false);
-                            Chasing_Mouse = null; //아이콘이 마우스를 따라다니는 것을 멈춘다.
+                            Chasing_Icon = null; //아이콘이 마우스를 따라다니는 것을 멈춘다.
                             Chasing_Icon_now = false;
                         }
                     }
@@ -71,7 +83,7 @@ public class UI_Mouse : MonoBehaviour
                         Empty_Icon.texture = result.gameObject.GetComponent<RawImage>().texture; // 마우스를 따라다닐 아이콘의 텍스쳐를 바꿔준다.
                         result.gameObject.GetComponent<RawImage>().texture = Empty_texture;      // 인벤토리의 아이콘을 바꿔준다.
                         Empty_Icon.gameObject.SetActive(true);
-                        Chasing_Mouse += Chase; //아이콘이 마우스를 따라다니도록 Action에 추가해준다.
+                        Chasing_Icon = () => { Empty_Icon.rectTransform.position = Input.mousePosition; }; //아이콘이 마우스를 따라다니도록 Action에 추가해준다.
                         Chasing_Icon_now = true;
                     }
                 }
@@ -80,19 +92,47 @@ public class UI_Mouse : MonoBehaviour
     }
 
     /// <summary>
-    /// 마우스 위치의 GUI를 알고 반환해주는 함수
+    /// UI를 마우스 왼쪽버튼을 꾹누를시 UI창이 따라가게 만드는 함수
     /// </summary>
-    private List<RaycastResult> Click_GUI_Check()
+    private void Holding_Left_Mouse()
     {
-        var ped = new PointerEventData(null);
-        ped.position = Input.mousePosition;
-        List<RaycastResult> results = new List<RaycastResult>();
-        gr.Raycast(ped, results);//GUI에 ray를 쏴서 부딪힌 GUI들을 results에 저장한다.
+        if (Input.GetMouseButton(0))
+        {
+            if (Click_GUI_Check() == null)
+                return;
+            foreach (RaycastResult result in Click_GUI_Check()) //만약 아이콘을 클릭한 것이라면 함수를 빠져나온다.
+            {
+                if (result.gameObject.name == "Icon")
+                    return;
+            }
+            foreach (RaycastResult result in Click_GUI_Check()) // 아이콘을 클릭하지 않았을경우
+            {
+                if ((result.gameObject == myManager.Manager_Equip.gameObject || result.gameObject == myManager.Manager_Inven.gameObject)
+                    && Chasing_Windows == null) // 인벤토리나 장비창의 최상단을 잡고있고 창이 마우스를 따라다니지 않는 경우
+                {
+                    Debug.Log("들어왔다!");
+                    RectTransform myWindow = result.gameObject.GetComponent<RectTransform>();
+                    mousePos = Input.mousePosition;
+                    Vector3 WindowPos = myWindow.position;
+                    Chasing_Windows = () =>
+                    {
+                        Vector3 mousePlus = Input.mousePosition - mousePos;
+                        myWindow.position = WindowPos + mousePlus;
+                    };
+                    return;
+                }
+            }
+        }
 
-        if (results.Count <= 0) return null;
-        return results;
+        if (Input.GetMouseButtonUp(0))
+        {
+            Chasing_Windows = null;
+        }
     }
 
+    #endregion
+
+    #region 오른쪽 마우스 클릭
     /// <summary>
     /// 인벤토리의 아이템을 오른쪽 클릭했을때 아이템이 장비창에 장착되게 하는 함수
     /// </summary>
@@ -136,6 +176,24 @@ public class UI_Mouse : MonoBehaviour
             }
         }
     }
+    #endregion
+
+    #region 보조기능들
+    /// <summary>
+    /// 마우스 위치의 GUI를 알고 반환해주는 함수
+    /// </summary>
+    private List<RaycastResult> Click_GUI_Check()
+    {
+        var ped = new PointerEventData(null);
+        ped.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        gr.Raycast(ped, results);//GUI에 ray를 쏴서 부딪힌 GUI들을 results에 저장한다.
+
+        if (results.Count <= 0) return null;
+        return results;
+    }
+
+
     /// <summary>
     /// 장비창에 있는 장비를 뺄때 사용하는 함수
     /// </summary>
@@ -163,10 +221,5 @@ public class UI_Mouse : MonoBehaviour
             }
         }
     }
-
-    private void Chase()
-    {
-        Empty_Icon.rectTransform.position = Input.mousePosition;
-    }
-
+    #endregion
 }
