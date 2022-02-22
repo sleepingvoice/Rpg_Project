@@ -126,6 +126,7 @@
     <Compile Include="Assets\Script\Monster\Mon_Spawn.cs" />
     <Compile Include="Assets\Script\Object\Obj_Function.cs" />
     <Compile Include="Assets\Script\Object\Obj_State.cs" />
+    <Compile Include="Assets\Script\Save\Save_Data.cs" />
     <Compile Include="Assets\Script\UI\UI_BarContent.cs" />
     <Compile Include="Assets\Script\UI\UI_Equip.cs" />
     <Compile Include="Assets\Script\UI\UI_Inventory.cs" />

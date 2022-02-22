@@ -33,13 +33,13 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    private void Load_Inventory()
+    public void Load_Inventory()
     {
         string str = File.ReadAllText(Application.dataPath + "/Resources/Inventory.json");
         Inven = JsonUtility.FromJson<Inventory_Items>(str);
     }
 
-    private void reload_Inventory()
+    public void reload_Inventory()
     {
         foreach(Inventory_Item item in Inven.Inventory)
         {
@@ -54,7 +54,7 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    private void Save_Inventory()
+    public void Save_Inventory()
     {
         bool b = true;
         for (int i = 0;i< Inven.Inventory.Count;i++)
