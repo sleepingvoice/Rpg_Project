@@ -1,58 +1,127 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.Networking;
 
-[SerializeField]
-public class My_State
-{
-    public string ID_Code; // 아이디 코드
-    public string Name;    // 닉네임
-    public int Exp;        // 경험치
-    public int Lv;         // 레벨
-    public int total_Exp;  // 총 경험치
-    public float Str;      // 힘
-    public float Dex;      // 민
-    public float Int;      // 지
-    public float Luk;      // 운
-    public float nowHp;    // 현재 체력
-    public float nowMp;    // 현재 마나
-    public Vector3 Position; // 현재 위치
-}
+using Base_Class;
+
 public class Save_Data : MonoBehaviour
 {
-    My_State state = new My_State();
-    Obj_State Play_State;
+    private Obj_State Play_State;      // 플레이어 상태
+    public string user_Code;           // 유저 코드
+    private string Normal_Url = "http://localhost/Test/";
 
     private void Start()
     {
         Play_State = GameManager.Instance.Player.GetComponent<Obj_State>();
     }
 
-    private async void InventoryLoding()
+    #region 서버에 저장,로드
+
+    /// <summary>
+    /// 서버에 저장된 유저의 json값을 불러오는 함수
+    /// </summary>
+    private IEnumerator Load_User_Info()
     {
-        await Task.Delay(1000);
-        while (true)
+        WWWForm my_State = new WWWForm();
+        my_State.AddField("User_Code", user_Code);
+        UnityWebRequest CheckCode = UnityWebRequest.Post(Normal_Url + "Load_UserInfo.php", my_State);
+
+        yield return CheckCode.SendWebRequest();
+
+        List<string> json = divide_Base64(CheckCode.downloadHandler.text); // echo로 나타나는 값은 두개가 합쳐져있기에 나누어 준다.
+        for(int i=0;i<json.Count;i++)
+            json[i] = Decoding_Base64(json[i]);
+
+        File.WriteAllText(Application.dataPath + "/Resources/State.json", json[0]);
+        File.WriteAllText(Application.dataPath + "/Resources/Inventory.json", json[1]);
+    }
+
+
+    /// <summary>
+    /// 유저의 json값을 서버에 저장하는 함수
+    /// </summary>
+    private IEnumerator Save_User_Info()
+    {
+        string post_state = Incoding_Base64(File.ReadAllText(Application.dataPath + "/Resources/State.json")); // josn값을 서버에 보내기위해 base64형태로 암호화한다.
+        string post_Inven = Incoding_Base64(File.ReadAllText(Application.dataPath + "/Resources/Inventory.json"));
+
+        WWWForm myState = new WWWForm();
+        myState.AddField("User_code_Post", user_Code);
+        myState.AddField("State_Post", post_state);
+        myState.AddField("Inven_Post", post_Inven);
+
+        UnityWebRequest SaveState = UnityWebRequest.Post(Normal_Url + "Save_UserInfo.php", myState);
+
+        yield return SaveState.SendWebRequest();
+
+        if (SaveState.error != null)
+            Debug.LogError("저장안됨");
+    }
+    #endregion
+
+    #region Base64기반 암복호화
+
+    /// <summary>
+    /// string을 base64형태로 인코딩
+    /// </summary>
+    private string Incoding_Base64(string s)
+    {
+        byte[] arr = Encoding.UTF8.GetBytes(s);
+        return System.Convert.ToBase64String(arr);
+    }
+
+    /// <summary>
+    /// base64를 string형태로 디코딩
+    /// </summary>
+    private string Decoding_Base64(string s)
+    {
+        string st1 = s.Replace("\n", "");                      
+        st1 = st1.Replace("\r", "");                             // 서버에서 날라온 값의 앞에 엔터가 되어있으므로 그것을 제외해준다.
+        st1 += new string('=', (4 - st1.Length % 4)%4);              // 값이 유니티의 base64형태의 기준과 맞지 않기에 바꿔준다.
+        byte[] arr = Convert.FromBase64String(st1);
+        return Encoding.UTF8.GetString(arr);
+    }
+    #endregion
+
+    #region 보조함수
+
+    /// <summary>
+    /// 서버에서 보낸 값을 나누어주는 함수
+    /// </summary>
+    private List<string> divide_Base64(string s)
+    {
+        List<string> arr = new List<string>();
+        string tmp = "";
+        for(int i=0;i<s.Length; i++)
         {
-            UI_Inventory myInven = GameManager.Instance.Ui_Manage.Manager_Inven.GetComponent<UI_Inventory>();
-            Load_State();
-            myInven.Load_Inventory();
-            myInven.reload_Inventory();
-            await Task.Delay(60000); //60초마다 세이브 로드를 반복
-            myInven.Save_Inventory();
-            Save_State();
+            if(s[i]=='/')
+            {
+                arr.Add(tmp);
+                tmp = "";
+            }
+            else
+            {
+                tmp += s[i];
+            }
         }
+        arr.Add(tmp);
+        return arr;
     }
 
-    private void Load_State()
-    {
+    #endregion
 
-    }
-
-    private void Save_State()
+    #region 스탯 저장
+    /// <summary>
+    /// 스탯 저장 함수
+    /// </summary>
+    private void Save_state()
     {
+        My_State state = new My_State();
         state.Exp = Play_State.Exp;
         state.Lv = Play_State.Lv;
         state.total_Exp = Play_State.total_Exp;
@@ -64,12 +133,28 @@ public class Save_Data : MonoBehaviour
         state.nowMp = Play_State.Mp;
         state.Position = Play_State.gameObject.transform.position;
 
-        File.WriteAllText(Application.dataPath + "/Resources/State.json", JsonUtility.ToJson(state));
         string json = JsonUtility.ToJson(state);
-        byte[] jsonByte = Encoding.UTF8.GetBytes(json);             // 제이슨을 바이트열로 변환
-        string json_convert = Encoding.Default.GetString(jsonByte); // 바이트열을 제이스로 변환
-        Debug.LogFormat("json is {0}, jsonbyte length is {1}", json, jsonByte.Length);
-        
+        File.WriteAllText(Application.dataPath + "/Resources/State.json", json);
     }
+
+    /// <summary>
+    /// 스탯 로드 함수
+    /// </summary>
+    private void Load_state()
+    {
+        My_State state = JsonUtility.FromJson<My_State>(File.ReadAllText(Application.dataPath + "/Resources/State.json"));
+        Play_State.Exp = state.Exp;
+        Play_State.Lv = state.Lv;
+        Play_State.total_Exp = state.total_Exp;
+        Play_State.Str = state.Str;
+        Play_State.Dex = state.Dex;
+        Play_State.Int = state.Int;
+        Play_State.Luk = state.Luk;
+        Play_State.Hp = state.nowHp;
+        Play_State.Mp = state.nowMp;
+        Play_State.gameObject.transform.position = state.Position;
+    }
+
+    #endregion
 
 }

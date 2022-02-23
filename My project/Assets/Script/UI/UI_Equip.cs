@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Item_Code;
+using Base_Class;
 
 public class UI_Equip : MonoBehaviour
 {

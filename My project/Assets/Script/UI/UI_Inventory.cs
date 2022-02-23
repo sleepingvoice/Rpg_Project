@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Item_Code;
+using Base_Class;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -10,15 +10,24 @@ public class UI_Inventory : MonoBehaviour
     public RawImage[] Icons;
     private Inventory_Items Inven;
 
-    private void Awake()
+    public void Get_InvenLoding()
     {
         InventoryLoding();
     }
 
-
-    public void Test()
+    private void Test()
     {
-        
+        Inven = new Inventory_Items();
+        for (int i = 0; i < 20; i++)
+        {
+            Inventory_Item item = new Inventory_Item();
+            item.Order = i;
+            item.Item_Code = "";
+            item.volume = 0;
+            Inven.Inventory.Add(item);
+            Debug.Log(i);
+        }
+        File.WriteAllText(Application.dataPath + "/Resources/Inventory.json", JsonUtility.ToJson(Inven));
     }
 
     private async void InventoryLoding()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Item_Code;
+using Base_Class;
 using System.IO;
 
 public class UI_Manager : MonoBehaviour
@@ -26,6 +26,7 @@ public class UI_Manager : MonoBehaviour
     {
         Check_Code();
         Manager_Mouse = GetComponent<UI_Mouse>();
+        Manager_Inven.Get_InvenLoding();
     }
 
     private void Update()
