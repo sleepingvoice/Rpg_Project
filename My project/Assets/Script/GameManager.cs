@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
     public Camera mainCam;
     public GameObject Player;
     public UI_Manager Ui_Manage;
+    public Save_Data My_Save;
 
-    [HideInInspector]public Vector3 TargetPos;
-    [HideInInspector]public Obj_Function Obj_Fun;
+    [HideInInspector] public Vector3 TargetPos;
+    [HideInInspector] public Obj_Function Obj_Fun;
+    [HideInInspector] public User_Info Info; // 유저정보를 가진 오브젝트
 
     private GameObject Effect_Click;
     private void Awake()
@@ -24,7 +26,10 @@ public class GameManager : MonoBehaviour
 
         TargetPos = Player.transform.position;
         Obj_Fun = GetComponent<Obj_Function>();
+        Info = User_Info.Instance;
     }
+
+
     public static GameManager Instance
     {
         get

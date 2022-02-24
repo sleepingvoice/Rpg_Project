@@ -15,21 +15,9 @@ public class UI_Inventory : MonoBehaviour
         InventoryLoding();
     }
 
-    private void Test()
-    {
-        Inven = new Inventory_Items();
-        for (int i = 0; i < 20; i++)
-        {
-            Inventory_Item item = new Inventory_Item();
-            item.Order = i;
-            item.Item_Code = "";
-            item.volume = 0;
-            Inven.Inventory.Add(item);
-            Debug.Log(i);
-        }
-        File.WriteAllText(Application.dataPath + "/Resources/Inventory.json", JsonUtility.ToJson(Inven));
-    }
-
+    /// <summary>
+    /// 인벤토리 상태를 json에 갱신하는 함수(비동기식)
+    /// </summary>
     private async void InventoryLoding()
     {
         await Task.Delay(1000);
@@ -42,12 +30,18 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 인벤토리 로드
+    /// </summary>
     public void Load_Inventory()
     {
         string str = File.ReadAllText(Application.dataPath + "/Resources/Inventory.json");
         Inven = JsonUtility.FromJson<Inventory_Items>(str);
     }
 
+    /// <summary>
+    /// 인벤토리 상태에 따른 아이콘 갱신
+    /// </summary>
     public void reload_Inventory()
     {
         foreach(Inventory_Item item in Inven.Inventory)
@@ -63,6 +57,9 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 인벤토리 세이브
+    /// </summary>
     public void Save_Inventory()
     {
         bool b = true;

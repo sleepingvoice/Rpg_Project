@@ -14,6 +14,7 @@ public class UI_Manager : MonoBehaviour
     [Header("관리하는 매니저")]
     public UI_Equip Manager_Equip;
     public UI_Inventory Manager_Inven;
+    public UI_State Manager_State;
     private UI_Mouse Manager_Mouse;
 
     [Header("빈칸 이미지")]
@@ -27,6 +28,11 @@ public class UI_Manager : MonoBehaviour
         Check_Code();
         Manager_Mouse = GetComponent<UI_Mouse>();
         Manager_Inven.Get_InvenLoding();
+    }
+
+    private void Start()
+    {
+        Manager_State.State_Btk_Set();
     }
 
     private void Update()

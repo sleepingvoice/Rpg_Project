@@ -107,8 +107,10 @@ public class UI_Mouse : MonoBehaviour
             }
             foreach (RaycastResult result in Click_GUI_Check()) // 아이콘을 클릭하지 않았을경우
             {
-                if ((result.gameObject == myManager.Manager_Equip.gameObject || result.gameObject == myManager.Manager_Inven.gameObject)
-                    && Chasing_Windows == null) // 인벤토리나 장비창의 최상단을 잡고있고 창이 마우스를 따라다니지 않는 경우
+                if ((result.gameObject == myManager.Manager_Equip.gameObject || 
+                    result.gameObject == myManager.Manager_Inven.gameObject || 
+                    result.gameObject == myManager.Manager_State.gameObject)
+                    && Chasing_Windows == null) // 인벤토리나 장비창또는 스탯창의 최상단을 잡고있고 창이 마우스를 따라다니지 않는 경우
                 {
                     Debug.Log("들어왔다!");
                     RectTransform myWindow = result.gameObject.GetComponent<RectTransform>();

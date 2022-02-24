@@ -63,9 +63,10 @@ public class Login_Manager : MonoBehaviour
 
 		string b = CheckResult(CheckID.downloadHandler.text);
 		Debug.Log(b);
-		if(b == "true")
+		if(b != "false")
         {
-			Debug.Log("로그인 성공!");
+			User_Info.Instance.User_Code = b;
+			User_Info.Instance.gameObject.GetComponent<Scene_Manager>().Go_to_GameScene();
 		}
 		else
         {

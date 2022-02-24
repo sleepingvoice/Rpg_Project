@@ -23,7 +23,7 @@ public class Obj_State : MonoBehaviour
     [Header("레벨")]
     public int Exp;        // 경험치
     public int Lv;         // 레벨
-    public int total_Exp;
+    [HideInInspector]public int total_Exp;
 
     [Header("능력치")]
     public float Str;      // 힘
@@ -31,6 +31,7 @@ public class Obj_State : MonoBehaviour
     public float Int;      // 지
     public float Luk;      // 운
 
+    [HideInInspector] public int Lest_Plus_stats; //남은 추가 스탯
     [HideInInspector] public float Plus_Atk; // 장비로 인해 올라가는 데미지
     [HideInInspector] public float Plus_Def; // 장비로 인해 올라가는 방어력
     private void Awake()
@@ -38,6 +39,7 @@ public class Obj_State : MonoBehaviour
         Plus_Atk = 0f;
         Plus_Def = 0f;
         Alive = true;
+        Lest_Plus_stats = 0;
         State_renewal();
         Mapping();
     }
@@ -49,6 +51,7 @@ public class Obj_State : MonoBehaviour
         Atk = Str * 5 + Plus_Atk;
         Def = Luk * 5 + Plus_Def;
         Atk_Speed = Dex * 10;
+        total_Exp = Lv * 100;
     }
 
     private void Mapping() // 맵핑함수
@@ -66,6 +69,8 @@ public class Obj_State : MonoBehaviour
         Health_Map.Add("Exp", Exp);
         Health_Map.Add("Plus_Atk", Plus_Atk);
         Health_Map.Add("Plus_Def", Plus_Def);
+        Health_Map.Add("Lv", Lv);
+        Health_Map.Add("LestPlusStats", Lest_Plus_stats);
     }
 
     /// <summary>
@@ -77,11 +82,38 @@ public class Obj_State : MonoBehaviour
         Mapping();
     }
 
+    /// <summary>
+    /// 맵변수의 값을 실제값에 넣어준다.
+    /// </summary>
+    public void inputValue()
+    {
+        Lv = (int)Health_Map["Lv"];
+        Exp = (int)Health_Map["Exp"];
+        Str = Health_Map["Str"];
+        Dex = Health_Map["Dex"];
+        Int = Health_Map["Int"];
+        Luk = Health_Map["Luk"];
+        Lest_Plus_stats = (int)Health_Map["LestPlusStats"];
+    }
     public void spawn() // 몬스터 스폰시 체력을 채워주고 값을 넣어준다.
     {
         Hp = MaxHp;
         Mp = MaxMp;
         State_renewal();
         Mapping();
+    }
+
+    /// <summary>
+    /// 레벨업시 함수
+    /// </summary>
+    public void LevelUp()
+    {
+        Exp = 0;
+        Lv++;
+        Lest_Plus_stats = 5;
+        State_renewal();
+        Hp = MaxHp;
+        Mp = MaxMp;
+        GameManager.Instance.Ui_Manage.Manager_State.Plus_Stats_Btk_OnOff(true); // 스탯창에 스탯을 추가할수있는 버튼을 킨다.
     }
 }

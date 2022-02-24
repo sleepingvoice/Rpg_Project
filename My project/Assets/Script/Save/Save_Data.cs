@@ -20,6 +20,7 @@ public class Save_Data : MonoBehaviour
         Play_State = GameManager.Instance.Player.GetComponent<Obj_State>();
     }
 
+
     #region 서버에 저장,로드
 
     /// <summary>
@@ -114,47 +115,4 @@ public class Save_Data : MonoBehaviour
     }
 
     #endregion
-
-    #region 스탯 저장
-    /// <summary>
-    /// 스탯 저장 함수
-    /// </summary>
-    private void Save_state()
-    {
-        My_State state = new My_State();
-        state.Exp = Play_State.Exp;
-        state.Lv = Play_State.Lv;
-        state.total_Exp = Play_State.total_Exp;
-        state.Str = Play_State.Str;
-        state.Dex = Play_State.Dex;
-        state.Int = Play_State.Int;
-        state.Luk = Play_State.Luk;
-        state.nowHp = Play_State.Hp;
-        state.nowMp = Play_State.Mp;
-        state.Position = Play_State.gameObject.transform.position;
-
-        string json = JsonUtility.ToJson(state);
-        File.WriteAllText(Application.dataPath + "/Resources/State.json", json);
-    }
-
-    /// <summary>
-    /// 스탯 로드 함수
-    /// </summary>
-    private void Load_state()
-    {
-        My_State state = JsonUtility.FromJson<My_State>(File.ReadAllText(Application.dataPath + "/Resources/State.json"));
-        Play_State.Exp = state.Exp;
-        Play_State.Lv = state.Lv;
-        Play_State.total_Exp = state.total_Exp;
-        Play_State.Str = state.Str;
-        Play_State.Dex = state.Dex;
-        Play_State.Int = state.Int;
-        Play_State.Luk = state.Luk;
-        Play_State.Hp = state.nowHp;
-        Play_State.Mp = state.nowMp;
-        Play_State.gameObject.transform.position = state.Position;
-    }
-
-    #endregion
-
 }
