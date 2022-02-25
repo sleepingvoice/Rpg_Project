@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject Player;
     public UI_Manager Ui_Manage;
     public Save_Data My_Save;
+    public SoundManager My_Sound;
 
     [HideInInspector] public Vector3 TargetPos;
     [HideInInspector] public Obj_Function Obj_Fun;

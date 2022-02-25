@@ -58,12 +58,13 @@ public class Char_Attack : MonoBehaviour
     
     public void Player_Attack()
     {
-        Attack_delay = 0f;
-        Delay += delayTime;
+        Attack_delay = 0f;        // 공격속도를 초기화한다.
+        Delay += delayTime;       // action 공격 시간을 측정하는 함수를 추가한다.
         GameManager.Instance.Obj_Fun.Attack(nearMonster, transform.gameObject);
         nearMonster.GetComponent<Mon_Attack>().Player = transform.gameObject;
         nearMonster.GetComponent<Mon_Move>().AttackAble = true;
         nearMonster.GetComponent<Mon_Attack>().FirstDelay();
+        GameManager.Instance.My_Sound.SE_Sound_Change("Attack").Play(); // 공격하는 사운드를 출력한다.
 
         if (GetComponent<Char_Move>().Attack_num < 3)
             GetComponent<Char_Move>().Attack_num++;

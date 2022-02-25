@@ -13,6 +13,7 @@ public class Char_Move : MonoBehaviour
     private Animator ani;       // 플레이어 애니메이션
     private bool walk;          // 걷는중 유무체크
     private bool Atk_now;       // 싸우는중 유무체크
+    private AudioSource Walk_Sound; // 걷는 소리
 
     private Char_Attack myAtk;
 
@@ -23,6 +24,11 @@ public class Char_Move : MonoBehaviour
         myAtk = GetComponent<Char_Attack>();
         Atk_now = false;
         Attack_num = 0;
+    }
+
+    private void Start()
+    {
+        Walk_Sound = GameManager.Instance.My_Sound.SE_Sound_Change("Walk");
     }
 
     public void Update()
@@ -75,9 +81,23 @@ public class Char_Move : MonoBehaviour
     private void WalkCheck()  // 걷는 애니메이션 체크
     {
         if (walk && Attack_num == 0)
+        {
             ani.SetBool("Walk", true);
+            if (!Walk_Sound.isPlaying)
+            {
+                Walk_Sound.Play();
+                Walk_Sound.loop = true;
+            }
+        }
         else
+        {
             ani.SetBool("Walk", false);
+            if (Walk_Sound.isPlaying)
+            {
+                Walk_Sound.Stop();
+                Walk_Sound.loop = false;
+            }   
+        }
     }
 
     private void Attack_Check() //공격 애니메이션 체크

@@ -14,7 +14,7 @@ public class UI_State : MonoBehaviour
     private Obj_State Play_State;
     private List<float> stat;
 
-    private void Start()
+    public void Awake_Fuction()
     {
         Play_State = GameManager.Instance.Player.GetComponent<Obj_State>();
         UpdateState();

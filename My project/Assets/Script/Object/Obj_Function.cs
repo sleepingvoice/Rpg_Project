@@ -31,11 +31,15 @@ public class Obj_Function:MonoBehaviour
         if (Target.tag == "Monster")
             Target.GetComponentInParent<Mon_Spawn>().StartCoroutine("Die_Respawn",Target);
     }
+    /// <summary>
+    /// Tagert에게 데미지를 추가해주는 코루틴
+    /// </summary>
     IEnumerator Demaged(GameObject Target)
     {
         if (Target.GetComponent<Animator>() == null)
             yield return null;
         Target.GetComponent<Animator>().SetTrigger("Def");
+        GameManager.Instance.My_Sound.SE_Sound_Change("Damaged").Play(); // 공격받는 소리를 추가한다.
     }
 
     public void Kill(GameObject Attacker,GameObject Target)

@@ -12,10 +12,10 @@ public class UI_Equip : MonoBehaviour
     [HideInInspector]public Dictionary<string, RawImage> Equip_Icons_Name; // 장비창 아이콘의 이름을 저장하는 맵변수
 
 
-    private void Awake()
+    public void Awake_Function()
     {
         Mapping();
-    }
+    }    
 
     /// <summary>
     /// 아이콘의 이름을 넣으면 그에 해당하는 이름 함수

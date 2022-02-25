@@ -27,7 +27,14 @@ public class UI_Manager : MonoBehaviour
     {
         Check_Code();
         Manager_Mouse = GetComponent<UI_Mouse>();
+        Awake_Fuction();
+    }
+
+    private void Awake_Fuction()
+    {
         Manager_Inven.Get_InvenLoding();
+        Manager_Equip.Awake_Function();
+        Manager_State.Awake_Fuction();
     }
 
     private void Start()

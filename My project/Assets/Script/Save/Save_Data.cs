@@ -18,6 +18,9 @@ public class Save_Data : MonoBehaviour
     private void Start()
     {
         Play_State = GameManager.Instance.Player.GetComponent<Obj_State>();
+
+        if (GameManager.Instance.Info != null)
+            user_Code = GameManager.Instance.Info.User_Code;
     }
 
 
