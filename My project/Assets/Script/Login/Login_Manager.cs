@@ -66,6 +66,8 @@ public class Login_Manager : MonoBehaviour
 		if(b != "false")
         {
 			User_Info.Instance.User_Code = b;
+			User_Info.Instance.save.user_Code = b;
+			User_Info.Instance.save.Load_UserData();
 			User_Info.Instance.gameObject.GetComponent<Scene_Manager>().Go_to_GameScene();
 		}
 		else
@@ -75,7 +77,7 @@ public class Login_Manager : MonoBehaviour
 		}
 	}
 
-	IEnumerator Register_ID()
+	private IEnumerator Register_ID()
 	{
 		UnityWebRequest CheckCode = UnityWebRequest.Get(Normal_Url + "RegisterCheck.php");
 

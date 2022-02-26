@@ -15,6 +15,7 @@ public class UI_Manager : MonoBehaviour
     public UI_Equip Manager_Equip;
     public UI_Inventory Manager_Inven;
     public UI_State Manager_State;
+    public UI_Setting Manager_Setting;
     private UI_Mouse Manager_Mouse;
 
     [Header("빈칸 이미지")]
@@ -45,6 +46,7 @@ public class UI_Manager : MonoBehaviour
     private void Update()
     {
         Bar_Update();
+        Manager_Setting.Setting_Update();
     }
 
     private void Bar_Update()

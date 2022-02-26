@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class User_Info : MonoBehaviour
 {
-     public string User_Code;
+    [HideInInspector]public string User_Code;
+    private Save_Data my_Save;
+    public Save_Data save { get { return my_Save; } }
 
     private static User_Info instance = null;
 
@@ -27,5 +29,6 @@ public class User_Info : MonoBehaviour
         else
             Destroy(this.gameObject);
         DontDestroyOnLoad(this);
+        my_Save = GetComponent<Save_Data>();
     }
 }

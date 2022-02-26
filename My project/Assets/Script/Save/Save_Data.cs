@@ -11,16 +11,22 @@ using Base_Class;
 
 public class Save_Data : MonoBehaviour
 {
-    private Obj_State Play_State;      // 플레이어 상태
-    public string user_Code;           // 유저 코드
+    [HideInInspector]public string user_Code;           // 유저 코드
     private string Normal_Url = "http://localhost/Test/";
 
     private void Start()
     {
-        Play_State = GameManager.Instance.Player.GetComponent<Obj_State>();
+        user_Code = "";
+    }
 
-        if (GameManager.Instance.Info != null)
-            user_Code = GameManager.Instance.Info.User_Code;
+    public void Load_UserData()
+    {
+        StartCoroutine(Load_User_Info());
+    }
+
+    public void Save_UserData()
+    {
+        StartCoroutine(Save_User_Info());
     }
 
 
@@ -65,6 +71,8 @@ public class Save_Data : MonoBehaviour
 
         if (SaveState.error != null)
             Debug.LogError("저장안됨");
+        else
+            Debug.Log("세이브!");
     }
     #endregion
 

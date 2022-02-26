@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Obj_Function Obj_Fun;
     [HideInInspector] public User_Info Info; // 유저정보를 가진 오브젝트
 
+    public Button Save;
+
     private GameObject Effect_Click;
     private void Awake()
     {
@@ -28,6 +31,9 @@ public class GameManager : MonoBehaviour
         TargetPos = Player.transform.position;
         Obj_Fun = GetComponent<Obj_Function>();
         Info = User_Info.Instance;
+        My_Save = Info.save;
+        Save.onClick.AddListener(() => Ui_Manage.Manager_Inven.Save_Inventory());
+        Save.onClick.AddListener(() => My_Save.Save_UserData());
     }
 
 
