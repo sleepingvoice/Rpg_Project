@@ -27,6 +27,12 @@ public class UI_Inventory : MonoBehaviour
             reload_Inventory();
             await Task.Delay(60000); //60초마다 세이브 로드를 반복
             Save_Inventory();
+
+#if UNITY_EDITOR
+            if (UnityEditor.EditorApplication.isPlaying == false)
+                return;
+#endif
+
         }
     }
 
@@ -35,7 +41,7 @@ public class UI_Inventory : MonoBehaviour
     /// </summary>
     public void Load_Inventory()
     {
-        string str = File.ReadAllText(Application.dataPath + "/Resources/Inventory.json");
+        string str = File.ReadAllText(Application.persistentDataPath + "/Inventory.json");
         Inven = JsonUtility.FromJson<Inventory_Items>(str);
     }
 
@@ -75,9 +81,10 @@ public class UI_Inventory : MonoBehaviour
         if (!b)
         {
             Debug.Log("저장중...");
-            File.WriteAllText(Application.dataPath + "/Resources/Inventory.json", JsonUtility.ToJson(Inven)); // Json을 현재 상태로 바꾸고 Josn에 저장
+            File.WriteAllText(Application.persistentDataPath + "/Inventory.json", JsonUtility.ToJson(Inven)); // Json을 현재 상태로 바꾸고 Josn에 저장
         }
     }
+
 
 
 

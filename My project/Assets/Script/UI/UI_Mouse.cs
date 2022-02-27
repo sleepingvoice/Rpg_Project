@@ -47,7 +47,8 @@ public class UI_Mouse : MonoBehaviour
         Holding_Left_Mouse();
     }
 
-    #region 왼쪽마우스클릭{
+    #region 왼쪽마우스클릭
+
     /// <summary>
     /// 인벤토리가 비어있지 않은상태에서 마우스 왼쪽 클릭시 아이템이 마우스를 따라다니게되는 함수
     /// </summary>
@@ -78,13 +79,16 @@ public class UI_Mouse : MonoBehaviour
                             Chasing_Icon_now = false;
                         }
                     }
-                    else //따라다니는 중이 아니라면
+                    else//따라다니는 중이 아니라면
                     {
-                        Empty_Icon.texture = result.gameObject.GetComponent<RawImage>().texture; // 마우스를 따라다닐 아이콘의 텍스쳐를 바꿔준다.
-                        result.gameObject.GetComponent<RawImage>().texture = Empty_texture;      // 인벤토리의 아이콘을 바꿔준다.
-                        Empty_Icon.gameObject.SetActive(true);
-                        Chasing_Icon = () => { Empty_Icon.rectTransform.position = Input.mousePosition; }; //아이콘이 마우스를 따라다니도록 Action에 추가해준다.
-                        Chasing_Icon_now = true;
+                        if (result.gameObject.GetComponent<RawImage>().texture != Empty_texture)    // 만약 클릭한 지점이 비어있는 상태가 아니라면
+                        {
+                            Empty_Icon.texture = result.gameObject.GetComponent<RawImage>().texture; // 마우스를 따라다닐 아이콘의 텍스쳐를 바꿔준다.
+                            result.gameObject.GetComponent<RawImage>().texture = Empty_texture;      // 인벤토리의 아이콘을 바꿔준다.
+                            Empty_Icon.gameObject.SetActive(true);
+                            Chasing_Icon = () => { Empty_Icon.rectTransform.position = Input.mousePosition; }; //아이콘이 마우스를 따라다니도록 Action에 추가해준다.
+                            Chasing_Icon_now = true;
+                        }
                     }
                 }
             }
@@ -135,6 +139,7 @@ public class UI_Mouse : MonoBehaviour
     #endregion
 
     #region 오른쪽 마우스 클릭
+
     /// <summary>
     /// 인벤토리의 아이템을 오른쪽 클릭했을때 아이템이 장비창에 장착되게 하는 함수
     /// </summary>
@@ -169,6 +174,8 @@ public class UI_Mouse : MonoBehaviour
                         {
                             result.gameObject.GetComponent<RawImage>().texture = myManager.Black_Item;
                             myManager.Manager_Equip.Hide_Icon_Name(Equip_Img.name, false); // 장비창 아래의 이름을 지워준다
+                            myManager.Manager_Inven.Save_Inventory(); // 바뀐값을 바꿔준다.
+                            myManager.Manager_Equip.Start_Equip_Save(); // 장비창도 바뀐값을 넣어준다.
                         }
 
                     }
@@ -178,23 +185,6 @@ public class UI_Mouse : MonoBehaviour
             }
         }
     }
-    #endregion
-
-    #region 보조기능들
-    /// <summary>
-    /// 마우스 위치의 GUI를 알고 반환해주는 함수
-    /// </summary>
-    private List<RaycastResult> Click_GUI_Check()
-    {
-        var ped = new PointerEventData(null);
-        ped.position = Input.mousePosition;
-        List<RaycastResult> results = new List<RaycastResult>();
-        gr.Raycast(ped, results);//GUI에 ray를 쏴서 부딪힌 GUI들을 results에 저장한다.
-
-        if (results.Count <= 0) return null;
-        return results;
-    }
-
 
     /// <summary>
     /// 장비창에 있는 장비를 뺄때 사용하는 함수
@@ -217,11 +207,31 @@ public class UI_Mouse : MonoBehaviour
                         myManager.Manager_Equip.Plus_Item_State(s, -1); // 장비창에 끼고있는 아이템의 능력치를 빼준다.
                         myManager.Manager_Equip.Hide_Icon_Name(Img.name, true);
                         raw.texture = tmp;
+                        myManager.Manager_Equip.Start_Equip_Save(); // 장비창을 저장해준다.
+                        myManager.Manager_Inven.Save_Inventory();   // 아이템창을 저장해준다.1
                         return;
                     }
                 }
             }
         }
     }
+    #endregion
+
+    #region 보조기능들
+
+    /// <summary>
+    /// 마우스 위치의 GUI를 알고 반환해주는 함수
+    /// </summary>
+    private List<RaycastResult> Click_GUI_Check()
+    {
+        var ped = new PointerEventData(null);
+        ped.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        gr.Raycast(ped, results);//GUI에 ray를 쏴서 부딪힌 GUI들을 results에 저장한다.
+
+        if (results.Count <= 0) return null;
+        return results;
+    }
+
     #endregion
 }

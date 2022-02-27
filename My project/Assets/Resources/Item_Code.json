@@ -87,6 +87,95 @@
     {
       "Item_Code": "W_M_001",
       "name": "도깨비 방망이",
+      "explain": "방망이에 가시가 �{
+  "DataArray": [
+    {
+      "Item_Code": "W_S_001",
+      "name": "숏소드",
+      "explain": "짧은 검",
+      "function": "Atk_02",
+      "PrefabName": "Sword_1"
+    },
+    {
+      "Item_Code": "W_S_002",
+      "name": "일본도",
+      "explain": "휘어진 일본검",
+      "function": "Atk_05",
+      "PrefabName": "Sword_2"
+    },
+    {
+      "Item_Code": "W_S_003",
+      "name": "롱소드",
+      "explain": "긴 검",
+      "function": "Atk_08",
+      "PrefabName": "Sword_3"
+    },
+    {
+      "Item_Code": "W_S_004",
+      "name": "세이버",
+      "explain": "휘어진 검",
+      "function": "Atk_08",
+      "PrefabName": "Sword_4"
+    },
+    {
+      "Item_Code": "W_S_005",
+      "name": "환도",
+      "explain": "한쪽에만 날이 서있는 칼",
+      "function": "Atk_10",
+      "PrefabName": "Sword_5"
+    },
+    {
+      "Item_Code": "W_S_006",
+      "name": "투핸드 소드",
+      "explain": "두손으로 다루는 커다란 칼",
+      "function": "Atk_15",
+      "PrefabName": "Sword_6"
+    },
+    {
+      "Item_Code": "W_A_001",
+      "name": "숏액스",
+      "explain": "짧은 도끼",
+      "function": "Atk_05",
+      "PrefabName": "Axe_1"
+    },
+    {
+      "Item_Code": "W_A_002",
+      "name": "클리버",
+      "explain": "양날 도끼",
+      "function": "Atk_10",
+      "PrefabName": "Axe_2"
+    },
+    {
+      "Item_Code": "W_A_003",
+      "name": "레드 클리버",
+      "explain": "붉은 양날도끼",
+      "function": "Atk_15",
+      "PrefabName": "Axe_3"
+    },
+    {
+      "Item_Code": "W_A_004",
+      "name": "배틀액스",
+      "explain": "한쪽에만 날이있는 거대한 도끼",
+      "function": "Atk_20",
+      "PrefabName": "Axe_4"
+    },
+    {
+      "Item_Code": "W_D_001",
+      "name": "숏 대거",
+      "explain": "짧은 단검",
+      "function": "Atk_02",
+      "PrefabName": "Dagger_1"
+    },
+    {
+      "Item_Code": "W_D_002",
+      "name": "롱 대거",
+      "explain": "긴 단검",
+      "function": "Atk_05",
+      "PrefabName": "Dagger_2"
+    },
+    {
+      "Item_Code": "W_M_001",
+      "name": "도깨비 방망이",
       "explain": "방망이에 가시가 달려있다",
       "function": "Atk_05",
       "PrefabName": "Mace_1"

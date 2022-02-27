@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using Base_Class;
 using TMPro;
 
 public class UI_Setting : MonoBehaviour
@@ -19,7 +21,10 @@ public class UI_Setting : MonoBehaviour
     private int Window_width;     // 창모드시 가로크기
     private int Window_height;    // 창모드시 세로크기
     private int DropBox_value = 0;     // 드롭박스의 선택된 값;
+    private bool window_Mode;
     
+
+
 
     public void Setting_Update()
     {
@@ -33,6 +38,8 @@ public class UI_Setting : MonoBehaviour
             Screen.SetResolution(1920, 1080, true);
         else
             Screen.SetResolution(Window_width, Window_height, false);
+
+        window_Mode = b;
     }
 
     /// <summary>
@@ -66,6 +73,32 @@ public class UI_Setting : MonoBehaviour
         List<int> result=devid_Window_Value(s);
         Window_width = result[0];
         Window_height = result[1];
+    }
+
+    public void Save_Setting_Value()
+    {
+        Setting_Value mySetting = new Setting_Value();
+        mySetting.SE = SE_Sound.value;
+        mySetting.BGM = BGM_Sound.value;
+        mySetting.Window_Mode = window_Mode;
+        mySetting.Window_Height = Window_height;
+        mySetting.Window_Width = Window_width;
+        mySetting.dropbox_value = DropBox_value;
+        File.WriteAllText(Application.persistentDataPath + "/Setting.json", JsonUtility.ToJson(mySetting));
+    }
+
+    public void Load_Setting_Value()
+    {
+        if (File.Exists(Application.persistentDataPath + "/Setting.json") == false)
+            return;
+        string str = File.ReadAllText(Application.persistentDataPath + "/Setting.json");
+        Setting_Value mySetting = JsonUtility.FromJson<Setting_Value>(str);
+        SE_Sound.value = Mathf.Floor(mySetting.SE * 100f) * 0.01f;
+        BGM_Sound.value = Mathf.Floor(mySetting.BGM * 100f) * 0.01f;
+        window_Mode = mySetting.Window_Mode;
+        Window_height = mySetting.Window_Height;
+        Window_width = mySetting.Window_Height;
+        DropBox_value = mySetting.dropbox_value;
     }
 
     private List<int> devid_Window_Value(string s)

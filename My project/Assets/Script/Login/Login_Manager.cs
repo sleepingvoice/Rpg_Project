@@ -62,7 +62,6 @@ public class Login_Manager : MonoBehaviour
 		yield return CheckID.SendWebRequest();
 
 		string b = CheckResult(CheckID.downloadHandler.text);
-		Debug.Log(b);
 		if(b != "false")
         {
 			User_Info.Instance.User_Code = b;

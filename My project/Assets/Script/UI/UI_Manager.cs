@@ -34,13 +34,14 @@ public class UI_Manager : MonoBehaviour
     private void Awake_Fuction()
     {
         Manager_Inven.Get_InvenLoding();
-        Manager_Equip.Awake_Function();
         Manager_State.Awake_Fuction();
     }
 
     private void Start()
     {
         Manager_State.State_Btk_Set();
+        Manager_Equip.Start_Equip();
+        Manager_Setting.Load_Setting_Value();
     }
 
     private void Update()
@@ -95,7 +96,7 @@ public class UI_Manager : MonoBehaviour
 
     private void Check_Code()
     {
-        string str = File.ReadAllText(Application.dataPath + "/Resources/Item_Code.json");
+        string str = File.ReadAllText(Application.persistentDataPath + "/Item_Code.json");
         Big_Data = JsonUtility.FromJson<Database>(str);
     }
 

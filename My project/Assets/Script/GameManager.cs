@@ -30,10 +30,18 @@ public class GameManager : MonoBehaviour
 
         TargetPos = Player.transform.position;
         Obj_Fun = GetComponent<Obj_Function>();
-        Info = User_Info.Instance;
-        My_Save = Info.save;
+
         Save.onClick.AddListener(() => Ui_Manage.Manager_Inven.Save_Inventory());
-        Save.onClick.AddListener(() => My_Save.Save_UserData());
+        Save.onClick.AddListener(() => Ui_Manage.Manager_Setting.Save_Setting_Value());
+
+        if (User_Info.Instance != null)
+        {
+            Info = User_Info.Instance;
+            My_Save = Info.save;
+            Save.onClick.AddListener(() => My_Save.Save_UserData());
+        }
+
+        
     }
 
 

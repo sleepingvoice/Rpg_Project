@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Base_Class
 {
-    [System.Serializable]
+    [Serializable]
     public class Data
     {
         public string Item_Code;
@@ -14,26 +15,26 @@ namespace Base_Class
         public string PrefabName;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Database
     {
         public List<Data> DataArray = new List<Data>();
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Inventory_Item
     {
         public int Order;
         public string Item_Code;
         public int volume;
     }
-    [System.Serializable]
+    [Serializable]
     public class Inventory_Items
     {
         public List<Inventory_Item> Inventory = new List<Inventory_Item>();
     }
 
-    [SerializeField]
+    [Serializable]
     public class My_State
     {
         public string Name;    // 닉네임
@@ -48,4 +49,29 @@ namespace Base_Class
         public float nowMp;    // 현재 마나
         public Vector3 Position; // 현재 위치
     }
+
+    [Serializable]
+    public class Equip
+    {
+        public string Part;
+        public string Item_Code;
+    }
+
+    [Serializable]
+    public class Equipes
+    {
+        public List<Equip> myEquip = new List<Equip>();
+    }
+
+    [Serializable]
+    public class Setting_Value
+    {
+        public float SE;
+        public float BGM;
+        public bool Window_Mode;
+        public int Window_Width;
+        public int Window_Height;
+        public int dropbox_value;
+    }
+        
 }
