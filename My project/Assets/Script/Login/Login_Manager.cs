@@ -33,6 +33,7 @@ public class Login_Manager : MonoBehaviour
 	{
 		Reg_SignUp.onClick.AddListener(() => Reg_BtkCheck(Register_ID()));
 		Log_Btk.onClick.AddListener(() => Log_BtkCheck(Login_ID()));
+		GetComponent<UI_Setting>().Load_Window_Value();
 	}
 
 	public void Log_BtkCheck(IEnumerator enumerator)

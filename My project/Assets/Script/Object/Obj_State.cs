@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Obj_State : MonoBehaviour
 {
-    [HideInInspector] public float Hp; // 체력
-    [HideInInspector] public float Mp; // 마력
+     public float Hp; // 체력
+     public float Mp; // 마력
     [HideInInspector] public float Atk;// 공격
     [HideInInspector] public float Def;// 방어
     [HideInInspector] public float Atk_Speed;//공속
@@ -23,7 +23,7 @@ public class Obj_State : MonoBehaviour
     [Header("레벨")]
     public int Exp;        // 경험치
     public int Lv;         // 레벨
-    [HideInInspector]public int total_Exp;
+    public int total_Exp;
 
     [Header("능력치")]
     public float Str;      // 힘

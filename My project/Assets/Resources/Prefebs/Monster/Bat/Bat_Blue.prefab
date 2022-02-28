@@ -716,13 +716,16 @@ MonoBehaviour:
   Atk_Time: 10
   Alive: 1
   Name: Blue_Bat
-  Exp: 0
+  Exp: 100
   Lv: 0
   total_Exp: 0
   Str: 1
   Dex: 1
   Int: 1
   Luk: 1
+  Lest_Plus_stats: 0
+  Plus_Atk: 0
+  Plus_Def: 0
 --- !u!114 &270954999120777985
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -111,6 +111,7 @@ public class UI_State : MonoBehaviour
         Play_State.Hp = state.nowHp;
         Play_State.Mp = state.nowMp;
         Play_State.gameObject.transform.position = state.Position;
+        Play_State.Roboot();
     }
 
 

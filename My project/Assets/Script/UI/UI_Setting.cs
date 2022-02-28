@@ -22,7 +22,8 @@ public class UI_Setting : MonoBehaviour
     private int Window_height;    // 창모드시 세로크기
     private int DropBox_value = 0;     // 드롭박스의 선택된 값;
     private bool window_Mode;
-    
+    private bool Window_Change = true;
+
 
 
 
@@ -67,12 +68,13 @@ public class UI_Setting : MonoBehaviour
     /// </summary>
     public void Check_Window_Value()
     {
-        if (DropBox_value == Window_Value.value) // 드롭박스의 값이 바꼈을때만 함수가 실행
+        if (DropBox_value == Window_Value.value && !Window_Change) // 드롭박스의 값이 바꼈을때만 함수가 실행
             return;
         string s = Window_Value.itemText.text;
         List<int> result=devid_Window_Value(s);
         Window_width = result[0];
         Window_height = result[1];
+        Window_Change = false;
     }
 
     public void Save_Setting_Value()
@@ -97,8 +99,21 @@ public class UI_Setting : MonoBehaviour
         BGM_Sound.value = Mathf.Floor(mySetting.BGM * 100f) * 0.01f;
         window_Mode = mySetting.Window_Mode;
         Window_height = mySetting.Window_Height;
-        Window_width = mySetting.Window_Height;
+        Window_width = mySetting.Window_Width;
         DropBox_value = mySetting.dropbox_value;
+        Screen.SetResolution(Window_width, Window_height, window_Mode);
+    }
+
+    public void Load_Window_Value()
+    {
+        if (File.Exists(Application.persistentDataPath + "/Setting.json") == false)
+            return;
+        string str = File.ReadAllText(Application.persistentDataPath + "/Setting.json");
+        Setting_Value mySetting = JsonUtility.FromJson<Setting_Value>(str);
+        window_Mode = mySetting.Window_Mode;
+        Window_height = mySetting.Window_Height;
+        Window_width = mySetting.Window_Width;
+        Screen.SetResolution(Window_width, Window_height, window_Mode);
     }
 
     private List<int> devid_Window_Value(string s)

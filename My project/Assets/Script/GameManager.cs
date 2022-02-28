@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
             Info = User_Info.Instance;
             My_Save = Info.save;
             Save.onClick.AddListener(() => My_Save.Save_UserData());
+            Save.onClick.AddListener(() => Application.Quit());
         }
 
         

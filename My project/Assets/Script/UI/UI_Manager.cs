@@ -42,6 +42,7 @@ public class UI_Manager : MonoBehaviour
         Manager_State.State_Btk_Set();
         Manager_Equip.Start_Equip();
         Manager_Setting.Load_Setting_Value();
+        Manager_State.Load_state();
     }
 
     private void Update()
