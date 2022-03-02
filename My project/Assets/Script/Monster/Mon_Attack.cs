@@ -32,6 +32,9 @@ public class Mon_Attack : MonoBehaviour
         Attack_Check();
     }
 
+    /// <summary>
+    /// 몬스터의 공격
+    /// </summary>
     public void Monster_Attack()
     {
         if (Player == null)
@@ -46,17 +49,11 @@ public class Mon_Attack : MonoBehaviour
         Attack_delay = 0f;
     }
 
-    public void FirstDelay()
-    {
-        Delay += Deley_Time;
-    }
 
-    private void Deley_Time()
-    {
-        if (Attack_delay <= my_state.Atk_Time)
-            Attack_delay += Time.deltaTime;
-    }
-
+    /// <summary>
+    /// 몬스터의 공격범위안에 있을경우 플레이어를 공격하고 
+    /// 밖에 있을경우 어그로를 푸는 함수
+    /// </summary>
     private void Attack_Check()
     {
         if (Range_Obj == null)
@@ -80,6 +77,17 @@ public class Mon_Attack : MonoBehaviour
             Player = null;
             GetComponent<Mon_Move>().AttackAble = false;
         }
+    }
+
+    public void FirstDelay()
+    {
+        Delay += Deley_Time;
+    }
+
+    private void Deley_Time()
+    {
+        if (Attack_delay <= my_state.Atk_Time)
+            Attack_delay += Time.deltaTime;
     }
 
 

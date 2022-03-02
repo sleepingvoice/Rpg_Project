@@ -45,6 +45,29 @@ public class UI_Inventory : MonoBehaviour
         Inven = JsonUtility.FromJson<Inventory_Items>(str);
     }
 
+
+    /// <summary>
+    /// 인벤토리 세이브
+    /// </summary>
+    public void Save_Inventory()
+    {
+        bool b = true;
+        for (int i = 0; i < Inven.Inventory.Count; i++)
+        {
+            if (Inven.Inventory[i].Item_Code != GameManager.Instance.Ui_Manage.Find_Item_Code(Icons[i].texture.name)) // UI의 코드가 저장된 데이터의 코드와 다를경우
+            {
+                Inven.Inventory[i].Item_Code = GameManager.Instance.Ui_Manage.Find_Item_Code(Icons[Inven.Inventory[i].Order].texture.name);
+                b = false;   // 한번이라도 값이 바뀐적이 있다면 false 값이 나온다.
+            }
+        }
+
+        if (!b)
+        {
+            Debug.Log("저장중...");
+            File.WriteAllText(Application.persistentDataPath + "/Inventory.json", JsonUtility.ToJson(Inven)); // Json을 현재 상태로 바꾸고 Josn에 저장
+        }
+    }
+
     /// <summary>
     /// 인벤토리 상태에 따른 아이콘 갱신
     /// </summary>
@@ -63,27 +86,6 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 인벤토리 세이브
-    /// </summary>
-    public void Save_Inventory()
-    {
-        bool b = true;
-        for (int i = 0;i< Inven.Inventory.Count;i++)
-        {
-            if (Inven.Inventory[i].Item_Code != GameManager.Instance.Ui_Manage.Find_Item_Code(Icons[i].texture.name)) // UI의 코드가 저장된 데이터의 코드와 다를경우
-            {
-                Inven.Inventory[i].Item_Code = GameManager.Instance.Ui_Manage.Find_Item_Code(Icons[Inven.Inventory[i].Order].texture.name);
-                b = false;   // 한번이라도 값이 바뀐적이 있다면 false 값이 나온다.
-            }
-        }
-
-        if (!b)
-        {
-            Debug.Log("저장중...");
-            File.WriteAllText(Application.persistentDataPath + "/Inventory.json", JsonUtility.ToJson(Inven)); // Json을 현재 상태로 바꾸고 Josn에 저장
-        }
-    }
 
 
 

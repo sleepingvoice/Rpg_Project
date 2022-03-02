@@ -33,7 +33,12 @@ public class Char_Attack : MonoBehaviour
         }
     }
 
-    public bool Player_AttackCheck() // 플레이어가 공격 가능해야하는지를 체크
+    #region 공격
+
+    /// <summary>
+    /// 플레이어의 공격 유무를 체크
+    /// </summary>
+    public bool Player_AttackCheck()
     {
         nearMonster = Char_function.Click_Obj(GameManager.Instance.TargetPos, "Monster");
 
@@ -56,6 +61,9 @@ public class Char_Attack : MonoBehaviour
         return false;
     }
     
+    /// <summary>
+    /// 플레이어가 공격했을때의 행동
+    /// </summary>
     public void Player_Attack()
     {
         Attack_delay = 0f;        // 공격속도를 초기화한다.
@@ -72,9 +80,14 @@ public class Char_Attack : MonoBehaviour
             GetComponent<Char_Move>().Attack_num = 1;
     }
 
+    /// <summary>
+    /// 공격 대기 시간
+    /// </summary>
     private void delayTime()
     {
         if (Attack_delay <= my_state.Atk_Time)
             Attack_delay += Time.deltaTime;
     }
+
+    #endregion
 }

@@ -36,7 +36,9 @@ public class Login_Manager : MonoBehaviour
 		GetComponent<UI_Setting>().Load_Window_Value();
 	}
 
-	public void Log_BtkCheck(IEnumerator enumerator)
+    #region 버튼
+
+    public void Log_BtkCheck(IEnumerator enumerator)
 	{
 		if (Log_Id.text != "" && Log_PassWord.text != "")
 		{
@@ -52,34 +54,44 @@ public class Login_Manager : MonoBehaviour
 		}
 	}
 
-	IEnumerator Login_ID()
+    #endregion
+
+    #region 로그인 회원가입
+
+    /// <summary>
+    /// ID 로그인 함수
+    /// </summary>
+    private IEnumerator Login_ID()
 	{
 
 		WWWForm IDform = new WWWForm();
 		IDform.AddField("ID_Post", Log_Id.text);
 		IDform.AddField("PassWord_Post", Log_PassWord.text);
-		UnityWebRequest CheckID = UnityWebRequest.Post(Normal_Url + "Login.php", IDform);
+		UnityWebRequest CheckID = UnityWebRequest.Post(Normal_Url + "Login.php", IDform); // 아이디와 비번을 받아서 전송시켜준다.
 
 		yield return CheckID.SendWebRequest();
 
-		string b = CheckResult(CheckID.downloadHandler.text);
-		if(b != "false")
+		string b = CheckResult(CheckID.downloadHandler.text); // 성공인지 실패인지를 받아온다.
+		if(b != "false") // 만약 실패하지않았다면 아이디가 존재하는 것이므로
         {
-			User_Info.Instance.User_Code = b;
+			User_Info.Instance.User_Code = b; // 나타난 유저코드를 넣어준다.
 			User_Info.Instance.save.user_Code = b;
-			User_Info.Instance.save.Load_UserData();
-			User_Info.Instance.gameObject.GetComponent<Scene_Manager>().Go_to_GameScene();
+			User_Info.Instance.save.Load_UserData(); // User_Data를 불러온다.
+			User_Info.Instance.gameObject.GetComponent<Scene_Manager>().Go_to_GameScene(); // 씬을 GameScene로 바꾼다.
 		}
-		else
+		else // 만약 아이디나 비밀번호가 틀렸다면
         {
-			Log_Error.SetActive(true);
-			Log_PassWord.text = "";
+			Log_Error.SetActive(true);  // 에러메세지를 보여준다.
+			Log_PassWord.text = "";  // 비밀번호를 초기화한다.
 		}
 	}
 
+	/// <summary>
+	/// 아이디 회원가입
+	/// </summary>
 	private IEnumerator Register_ID()
 	{
-		UnityWebRequest CheckCode = UnityWebRequest.Get(Normal_Url + "RegisterCheck.php");
+		UnityWebRequest CheckCode = UnityWebRequest.Get(Normal_Url + "RegisterCheck.php"); // User_Code의 마지막 값을 받아온다.
 
 		yield return CheckCode.SendWebRequest();
 
@@ -93,7 +105,7 @@ public class Login_Manager : MonoBehaviour
 			string CodeString = CheckCode.downloadHandler.text;
 			int code = (int.Parse(CodeString));
 			code++;
-			User_code = code.ToString("000000");
+			User_code = code.ToString("000000"); // 유저코드의 마지막값에서 1 더해준값을 넣어준다.
 		}
 
 		WWWForm IDform = new WWWForm();
@@ -101,22 +113,29 @@ public class Login_Manager : MonoBehaviour
 		IDform.AddField("PassWord_Post", Reg_PassWord.text);
 		IDform.AddField("User_code_Post", User_code);
 
-		UnityWebRequest www = UnityWebRequest.Post(Normal_Url + "register.php", IDform);
+		UnityWebRequest www = UnityWebRequest.Post(Normal_Url + "register.php", IDform); // 회원가입을 진행한다.
 
 		yield return www.SendWebRequest();
 
 		string s = CheckResult(www.downloadHandler.text);
+
 		if(s== "false")
 			Reg_Error_SameID.SetActive(false);
 		else
 			Reg_Success.SetActive(true);
+
+		// 서버의 값을 받아온후 회원가입 text를 모두 초기화해준다.
 
 		Reg_Id.text = "";
 		Reg_PassWord.text = "";
 		Reg_PassWord_Check.text = "";
 	}
 
-	private void CheckPass()
+    #endregion
+
+    #region 보조함수
+
+    private void CheckPass()
     {
 		if(Reg_PassWord_Check.text != Reg_PassWord.text)
         {
@@ -133,4 +152,6 @@ public class Login_Manager : MonoBehaviour
 
 		return st1;
 	}
+
+    #endregion
 }

@@ -29,6 +29,9 @@ public class Mon_Move : MonoBehaviour
             Mob_Move_Fight();
     }
 
+    /// <summary>
+    /// 몬스터의 이동 기본상태
+    /// </summary>
     private void Mob_Move_Idle()
     {
         float dis = Vector3.Distance(transform.position, TargetMove);
@@ -46,6 +49,9 @@ public class Mon_Move : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 몬스터가 싸우는 중의 이동
+    /// </summary>
     private void Mob_Move_Fight()
     {
         Mon_Attack myAttack = GetComponent<Mon_Attack>();

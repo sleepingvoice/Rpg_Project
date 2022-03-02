@@ -36,7 +36,13 @@ public class Char_Move : MonoBehaviour
         Walk_To_Target(GameManager.Instance.TargetPos);
     }
 
-    public void Walk_To_Target(Vector3 TargetPos) // 타겟방향으로 이동
+    #region 움직임
+
+    /// <summary>
+    /// TagetPos로 이동하는 함수
+    /// 일정거리이상이 되고 공격할 대상이 있다면 공격함수로 넘어간다.
+    /// </summary>
+    public void Walk_To_Target(Vector3 TargetPos)
     {
         if (TargetPos == transform.position)
             return;
@@ -44,18 +50,18 @@ public class Char_Move : MonoBehaviour
         walk = false;
         Atk_now = myAtk.Player_AttackCheck();
 
-        if (dis>0.5f || (dis >= 0.05f && !myAtk.now_fight))
+        if (dis>0.5f || (dis >= 0.05f && !myAtk.now_fight)) //거리가 0.5f이상으로 멀거나 거리가 0.05f보다 멀고 공격중이 아닐때
         {
             transform.position = Vector3.MoveTowards(transform.position, TargetPos, Time.deltaTime * Speed_move);
             walk = true;
 
             GameManager.Instance.Obj_Fun.Rotate_Target(TargetPos, this.gameObject, Speed_rotate);
         }
-        else if(myAtk.now_fight && Atk_now)
+        else if(myAtk.now_fight && Atk_now) // 당장 공격해야할때
         {
             myAtk.Player_Attack();
         }
-        else if(dis < 0.05f && !myAtk.now_fight)
+        else if(dis < 0.05f && !myAtk.now_fight) // 공격중이 아니고 거리가 0.05f보다 가까울때
         {
             transform.position = TargetPos;
         }
@@ -64,6 +70,9 @@ public class Char_Move : MonoBehaviour
         Change_Ani();
     }
 
+    /// <summary>
+    /// 몬스터가 죽었을 때 행동을 정하는 함수
+    /// </summary>
     public void Monster_Kill()
     {
         Atk_now = false;
@@ -72,13 +81,23 @@ public class Char_Move : MonoBehaviour
         GameManager.Instance.TargetPos = transform.position;
     }
 
+    #endregion
+
+    #region 애니메이션
+
+    /// <summary>
+    /// 애니메이션을 모아놓은 함수
+    /// </summary>
     private void Change_Ani()  // 애니메이션 변경
     {
         WalkCheck();
         Attack_Check();
     }
 
-    private void WalkCheck()  // 걷는 애니메이션 체크
+    /// <summary>
+    /// 걷는 애니메이션 체크
+    /// </summary>
+    private void WalkCheck()
     {
         if (walk && Attack_num == 0)
         {
@@ -100,7 +119,10 @@ public class Char_Move : MonoBehaviour
         }
     }
 
-    private void Attack_Check() //공격 애니메이션 체크
+    /// <summary>
+    /// 공격 애니메이션 체크
+    /// </summary>
+    private void Attack_Check()
     {
         if (myAtk.now_fight)
             ani.SetInteger("Attack", Attack_num);
@@ -111,6 +133,6 @@ public class Char_Move : MonoBehaviour
         }
     }
 
-
+    #endregion
 
 }
