@@ -126,6 +126,7 @@
     <Compile Include="Assets\Script\Monster\Mon_Spawn.cs" />
     <Compile Include="Assets\Script\Object\Obj_Function.cs" />
     <Compile Include="Assets\Script\Object\Obj_State.cs" />
+    <Compile Include="Assets\Script\OutLine\OutLine_Change.cs" />
     <Compile Include="Assets\Script\Save\Save_Data.cs" />
     <Compile Include="Assets\Script\Scene\Scene_Manager.cs" />
     <Compile Include="Assets\Script\Sound\SoundManager.cs" />
@@ -165,6 +166,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\TAA.cginc" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Resources\Shaders\AmbientOcclusion.cginc" />
+    <None Include="Assets\Script\OutLine\OutLine.shader" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\Shaders\Surface_Shader.shader" />
     <None Include="Assets\Asset\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
     <None Include="Assets\Asset\KUBIKOS - 3D Cube Village And Farm\PostProcessing\Editor Resources\Monitors\VectorscopeCompute.compute" />

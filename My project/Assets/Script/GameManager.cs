@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Vector3 TargetPos;
     [HideInInspector] public Obj_Function Obj_Fun;
     [HideInInspector] public User_Info Info; // 유저정보를 가진 오브젝트
+    [HideInInspector] public OutLine_Change OutLine; // 아웃라인 관련 스크립트
 
     public Button Save;
 
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
 
         TargetPos = Player.transform.position;
         Obj_Fun = GetComponent<Obj_Function>();
+        OutLine = GetComponent<OutLine_Change>();
 
         Save.onClick.AddListener(() => Ui_Manage.Manager_Inven.Save_Inventory());
         Save.onClick.AddListener(() => Ui_Manage.Manager_Setting.Save_Setting_Value());
@@ -44,7 +46,6 @@ public class GameManager : MonoBehaviour
 
         
     }
-
 
     public static GameManager Instance
     {
@@ -67,6 +68,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// TargetPos에 이펙트 발생
+    /// </summary>
     private IEnumerator Effect_Make(Vector3 TargetPos)
     {
         Vector3 Position = TargetPos + new Vector3(0, 0.4f, 0);
