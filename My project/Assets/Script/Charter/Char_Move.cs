@@ -16,12 +16,13 @@ public class Char_Move : MonoBehaviour
     private AudioSource Walk_Sound; // 걷는 소리
 
     private Char_Attack myAtk;
-
+    private Char_Talk myTalk;
 
     private void Awake()
     {
         ani = GetComponent<Animator>();
         myAtk = GetComponent<Char_Attack>();
+        myTalk = GetComponent<Char_Talk>();
         Atk_now = false;
         Attack_num = 0;
     }
@@ -49,6 +50,7 @@ public class Char_Move : MonoBehaviour
         dis = Vector3.Distance(TargetPos, transform.position);
         walk = false;
         Atk_now = myAtk.Player_AttackCheck();
+        myTalk.Talk_NPC();
 
         if (dis>0.5f || (dis >= 0.05f && !myAtk.now_fight)) //거리가 0.5f이상으로 멀거나 거리가 0.05f보다 멀고 공격중이 아닐때
         {
@@ -65,9 +67,18 @@ public class Char_Move : MonoBehaviour
         {
             transform.position = TargetPos;
         }
-        
 
+        Change_OutLine();
         Change_Ani();
+    }
+
+    private void Change_OutLine()
+    {
+        if(myTalk.NPC == null && myAtk.Monster == null)
+        {
+
+            GameManager.Instance.OutLine.Changed_Value_OutLineList(0f);
+        }
     }
 
     /// <summary>

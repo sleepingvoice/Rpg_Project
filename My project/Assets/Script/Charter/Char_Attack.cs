@@ -10,9 +10,12 @@ public class Char_Attack : MonoBehaviour
     private Obj_State my_state;     // 나의 상태창 가져오기
     private Action Delay;           // 딜레이 업데이트에 돌리는용도
     private GameObject nearMonster; // 공격 대상 몬스터
+
     public bool now_fight;          // 전투중인지 아닌지 판단
+    
 
     public GameObject Monster { get { return nearMonster; } }
+
 
     private void Awake()
     {
@@ -40,23 +43,24 @@ public class Char_Attack : MonoBehaviour
     /// </summary>
     public bool Player_AttackCheck()
     {
-        nearMonster = Char_function.Click_Obj(GameManager.Instance.TargetPos, "Monster");
+        nearMonster = Char_function.Click_Obj(GameManager.Instance.TargetPos, "Monster"); // 클릭한 지점의 Monster 라는 tag를 가진 오브젝트를 반환
 
-        if (nearMonster != null)
+        if (nearMonster != null) // 만약 오브젝트가 존재한다면
         {
             now_fight = true;
 
-
             GameManager.Instance.TargetPos = nearMonster.transform.position;
-
+            GameManager.Instance.OutLine.Change_OutLine(nearMonster, 150f); // 공격하는 몬스터의 테두리를 생성한다.
+            GameManager.Instance.OutLine.Add_OutLineList(nearMonster);
 
             float dis = Vector3.Distance(nearMonster.transform.position, transform.position);
-            if(dis <= 0.5f && Attack_delay >= my_state.Atk_Time)
-            {
+            
+            if(dis <= 0.5f && Attack_delay >= my_state.Atk_Time) // 만약 거리가 가깝고 플레이어가 공격이 가능하다면
                 return true;
-            }
+
             return false;
         }
+
         now_fight = false;
         return false;
     }
@@ -73,6 +77,7 @@ public class Char_Attack : MonoBehaviour
         nearMonster.GetComponent<Mon_Move>().AttackAble = true;
         nearMonster.GetComponent<Mon_Attack>().FirstDelay();
         GameManager.Instance.My_Sound.SE_Sound_Change("Attack").Play(); // 공격하는 사운드를 출력한다.
+
 
         if (GetComponent<Char_Move>().Attack_num < 3)
             GetComponent<Char_Move>().Attack_num++;
