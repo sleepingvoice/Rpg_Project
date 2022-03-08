@@ -8,16 +8,20 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
 
+    [Header("Player 관련")]
     public Camera mainCam;
     public GameObject Player;
-    public UI_Manager Ui_Manage;
-    public Save_Data My_Save;
+
+    [Header("UI 관련")]
+    public UI_Manager Ui_Manager;
     public SoundManager My_Sound;
+    public Npc_Manager npc_manager;
 
     [HideInInspector] public Vector3 TargetPos;
     [HideInInspector] public Obj_Function Obj_Fun;
     [HideInInspector] public User_Info Info; // 유저정보를 가진 오브젝트
     [HideInInspector] public OutLine_Change OutLine; // 아웃라인 관련 스크립트
+    [HideInInspector]public Save_Data My_Save;
 
     public Button Save;
 
@@ -33,8 +37,8 @@ public class GameManager : MonoBehaviour
         Obj_Fun = GetComponent<Obj_Function>();
         OutLine = GetComponent<OutLine_Change>();
 
-        Save.onClick.AddListener(() => Ui_Manage.Manager_Inven.Save_Inventory());
-        Save.onClick.AddListener(() => Ui_Manage.Manager_Setting.Save_Setting_Value());
+        Save.onClick.AddListener(() => Ui_Manager.Manager_Inven.Save_Inventory());
+        Save.onClick.AddListener(() => Ui_Manager.Manager_Setting.Save_Setting_Value());
 
         if (User_Info.Instance != null)
         {

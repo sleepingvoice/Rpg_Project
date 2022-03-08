@@ -114,6 +114,6 @@ public class Obj_State : MonoBehaviour
         State_renewal();
         Hp = MaxHp;
         Mp = MaxMp;
-        GameManager.Instance.Ui_Manage.Manager_State.Plus_Stats_Btk_OnOff(true); // 스탯창에 스탯을 추가할수있는 버튼을 킨다.
+        GameManager.Instance.Ui_Manager.Manager_State.Plus_Stats_Btk_OnOff(true); // 스탯창에 스탯을 추가할수있는 버튼을 킨다.
     }
 }

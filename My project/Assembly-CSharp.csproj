@@ -125,6 +125,11 @@
     <Compile Include="Assets\Script\Monster\Mon_AttackRange.cs" />
     <Compile Include="Assets\Script\Monster\Mon_Move.cs" />
     <Compile Include="Assets\Script\Monster\Mon_Spawn.cs" />
+    <Compile Include="Assets\Script\NPC\Npc_Manager.cs" />
+    <Compile Include="Assets\Script\NPC\Npc_Quest.cs" />
+    <Compile Include="Assets\Script\NPC\Npc_Shop.cs" />
+    <Compile Include="Assets\Script\NPC\Npc_State.cs" />
+    <Compile Include="Assets\Script\NPC\Npc_Talk.cs" />
     <Compile Include="Assets\Script\Object\Obj_Function.cs" />
     <Compile Include="Assets\Script\Object\Obj_State.cs" />
     <Compile Include="Assets\Script\OutLine\OutLine_Change.cs" />

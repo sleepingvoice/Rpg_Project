@@ -1,0 +1,18 @@
+{
+  "Npc": [
+    {
+      "Obj_name": "NPC_01",
+      "Char_name": "페어리1",
+      "Line": [ "첫번째 대사", "두번째 대사", "세번째 대사" ],
+      "Button_Function": [ "Shop", "Quest" , "End" ],
+      "Prefeb_img_name": ""
+    },
+    {
+      "Obj_name": "NPC_02",
+      "Char_name": "페어리2",
+      "Line": [ "첫번째 대사", "두번째 대사", "세번째 대사" ],
+      "Button_Function": [ "Shop", "Quest" , "End" ],
+      "Prefeb_img_name": ""
+    }
+  ]
+}

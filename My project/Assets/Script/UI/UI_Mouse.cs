@@ -22,8 +22,8 @@ public class UI_Mouse : MonoBehaviour
     {
         gr = GetComponent<GraphicRaycaster>();
         Chasing_Icon_now = false;
-        myManager = GameManager.Instance.Ui_Manage;
-        Empty_texture = GameManager.Instance.Ui_Manage.Black_Item;
+        myManager = GameManager.Instance.Ui_Manager;
+        Empty_texture = GameManager.Instance.Ui_Manager.Black_Item;
     }
 
     private void Update()

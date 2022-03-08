@@ -54,9 +54,9 @@ public class UI_Inventory : MonoBehaviour
         bool b = true;
         for (int i = 0; i < Inven.Inventory.Count; i++)
         {
-            if (Inven.Inventory[i].Item_Code != GameManager.Instance.Ui_Manage.Find_Item_Code(Icons[i].texture.name)) // UI의 코드가 저장된 데이터의 코드와 다를경우
+            if (Inven.Inventory[i].Item_Code != GameManager.Instance.Ui_Manager.Find_Item_Code(Icons[i].texture.name)) // UI의 코드가 저장된 데이터의 코드와 다를경우
             {
-                Inven.Inventory[i].Item_Code = GameManager.Instance.Ui_Manage.Find_Item_Code(Icons[Inven.Inventory[i].Order].texture.name);
+                Inven.Inventory[i].Item_Code = GameManager.Instance.Ui_Manager.Find_Item_Code(Icons[Inven.Inventory[i].Order].texture.name);
                 b = false;   // 한번이라도 값이 바뀐적이 있다면 false 값이 나온다.
             }
         }
@@ -77,11 +77,11 @@ public class UI_Inventory : MonoBehaviour
         {
             if (item.Item_Code != "")
             {
-                Icons[item.Order].texture = GameManager.Instance.Ui_Manage.Find_Item_Img(item.Item_Code);
+                Icons[item.Order].texture = GameManager.Instance.Ui_Manager.Find_Item_Img(item.Item_Code);
             }
             else
             {
-                Icons[item.Order].texture = GameManager.Instance.Ui_Manage.Black_Item;
+                Icons[item.Order].texture = GameManager.Instance.Ui_Manager.Black_Item;
             }
         }
     }

@@ -61,7 +61,7 @@ public class UI_Equip : MonoBehaviour
     /// </summary>
     public void Plus_Item_State(string Item_Code, int PlusMinus)
     {
-        UI_Manager my_UI = GameManager.Instance.Ui_Manage;
+        UI_Manager my_UI = GameManager.Instance.Ui_Manager;
         Data my_Item = my_UI.FindItem(Item_Code);
         if (my_Item.function != "") // 만약 아이템의 효과가 비어있지 않다면
         {
@@ -87,7 +87,7 @@ public class UI_Equip : MonoBehaviour
         if (Equip_name != "Weapon")
             return;
 
-        UI_Manager my_UI = GameManager.Instance.Ui_Manage;
+        UI_Manager my_UI = GameManager.Instance.Ui_Manager;
         Data myWeapons = my_UI.FindItem(Item_Code);
         Debug.Log(myWeapons.PrefabName);
         foreach (GameObject obj in GameManager.Instance.Player.GetComponent<Char_Weapons>().myWeapons)
@@ -130,7 +130,7 @@ public class UI_Equip : MonoBehaviour
         foreach (var name in Equip_Icons_Name)
         {
             Equip tmp = new Equip();
-            tmp.Item_Code = GameManager.Instance.Ui_Manage.Find_Item_Code(name.Value.texture.name);
+            tmp.Item_Code = GameManager.Instance.Ui_Manager.Find_Item_Code(name.Value.texture.name);
             tmp.Part = name.Key;
             Debug.Log(tmp.Item_Code + " " +tmp.Part);
             my_Equip.myEquip.Add(tmp);
@@ -151,7 +151,7 @@ public class UI_Equip : MonoBehaviour
             RawImage raw = Equip_Icons_Name[equip.Part];
             if(equip.Item_Code!="")
             {
-                raw.texture = GameManager.Instance.Ui_Manage.Find_Item_Img(equip.Item_Code);
+                raw.texture = GameManager.Instance.Ui_Manager.Find_Item_Img(equip.Item_Code);
             }
         }
     }
