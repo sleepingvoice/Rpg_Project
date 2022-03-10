@@ -1,0 +1,42 @@
+{
+  "List": [
+    {
+      "Npc_Name": "NPC_01",
+      "myShop": [
+        {
+          "item_code": "W_S_001",
+          "Price": 500
+        },
+        {
+          "item_code": "W_S_002",
+          "Price": 1000
+        },
+        {
+          "item_code": "H_001",
+          "Price": 50
+        },
+        {
+          "item_code": "H_003",
+          "Price": 50
+        }
+      ]
+    },
+    {
+      "Npc_Name": "NPC_02",
+      "myShop": [
+        {
+          "item_code": "W_D_001",
+          "Price": 500
+        },
+        {
+          "item_code": "H_001",
+          "Price": 50
+        },
+        {
+          "item_code": "H_003",
+          "Price": 50
+        }
+      ]
+    }
+  ]
+}

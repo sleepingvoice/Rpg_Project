@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public UI_Manager Ui_Manager;
     public SoundManager My_Sound;
     public Npc_Manager npc_manager;
+    public Shop_Manager Shop_manager;
 
     [HideInInspector] public Vector3 TargetPos;
     [HideInInspector] public Obj_Function Obj_Fun;

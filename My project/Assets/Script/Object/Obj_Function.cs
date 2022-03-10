@@ -64,6 +64,7 @@ public class Obj_Function:MonoBehaviour
         {
             Attacker.GetComponent<Char_Move>().Monster_Kill();
             Attacker.GetComponent<Obj_State>().Exp += Target.GetComponent<Obj_State>().Exp;
+            GameManager.Instance.Ui_Manager.Manager_Inven.AddMoney(100);
         }
         else if(Attacker.tag == "Monster")
         {
