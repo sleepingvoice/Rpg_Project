@@ -31,7 +31,7 @@ public class Obj_State : MonoBehaviour
     public float Int;      // 지
     public float Luk;      // 운
 
-    [HideInInspector] public int Lest_Plus_stats; //남은 추가 스탯
+    public int Lest_Plus_stats; //남은 추가 스탯
     [HideInInspector] public float Plus_Atk; // 장비로 인해 올라가는 데미지
     [HideInInspector] public float Plus_Def; // 장비로 인해 올라가는 방어력
     private void Awake()
@@ -108,12 +108,13 @@ public class Obj_State : MonoBehaviour
     /// </summary>
     public void LevelUp()
     {
-        Exp = 0;
+        Exp -= total_Exp;
         Lv++;
-        Lest_Plus_stats = 5;
-        State_renewal();
+        Lest_Plus_stats++;
+        total_Exp += 100;
         Hp = MaxHp;
         Mp = MaxMp;
+        Roboot();
         GameManager.Instance.Ui_Manager.Manager_State.Plus_Stats_Btk_OnOff(true); // 스탯창에 스탯을 추가할수있는 버튼을 킨다.
     }
 }

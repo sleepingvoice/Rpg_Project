@@ -10,7 +10,8 @@ public class Mon_Move : MonoBehaviour
 
     public float Wait_Time;     // 회전 후 대기시간
 
-    [HideInInspector] public bool AttackAble = false;    // 공격이 가능한지 아닌지 체크
+    public enum State { Idle, Fight, Stop }; // 공격이 가능한지 아닌지 체크
+    public State nowState;
 
     private Vector3 TargetMove; // 이동할 지점
     private float Time_Check;   // 대기시간 체크
@@ -19,14 +20,17 @@ public class Mon_Move : MonoBehaviour
     {
         TargetMove = GetComponentInParent<Mon_Spawn>().Return_RandomPos();
         Time_Check = 0f;
+        nowState = State.Idle;
     }
 
     private void Update()
     {
-        if (!AttackAble)
+        if (nowState == State.Idle)
             Mob_Move_Idle();
-        else
+        else if (nowState == State.Fight)
             Mob_Move_Fight();
+        else if (nowState == State.Stop)
+            TargetMove = transform.position;
     }
 
     /// <summary>

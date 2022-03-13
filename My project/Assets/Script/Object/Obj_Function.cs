@@ -49,7 +49,6 @@ public class Obj_Function:MonoBehaviour
             yield return null;
         Target.GetComponent<Animator>().SetTrigger("Die"); // Die트리거를 실행한다.
         Target.GetComponent<Obj_State>().Alive = false;    // 스탯에 생존유무를 체크한다.
-        yield return new WaitForSeconds(2f);               // Die 애니메이션이 실행하는동안 기다린후
         if (Target.tag == "Monster")
             Target.GetComponentInParent<Mon_Spawn>().StartCoroutine("Die_Respawn", Target); // Target의 죽은후 리스폰을 실행시킨다.
     }
@@ -64,13 +63,18 @@ public class Obj_Function:MonoBehaviour
         {
             Attacker.GetComponent<Char_Move>().Monster_Kill();
             Attacker.GetComponent<Obj_State>().Exp += Target.GetComponent<Obj_State>().Exp;
-            GameManager.Instance.Ui_Manager.Manager_Inven.AddMoney(100);
+            GameManager.Instance.Ui_Manager.Manager_Inven.AddMoney(1000);
+            if(Attacker.GetComponent<Obj_State>().Exp >= Attacker.GetComponent<Obj_State>().Health_Map["MaxExp"])
+            {
+                Attacker.GetComponent<Obj_State>().LevelUp();
+            }
+            Attacker.GetComponent<Obj_State>().Roboot();
         }
         else if(Attacker.tag == "Monster")
         {
             Attacker.GetComponent<Mon_Attack>().Player = null;
             Attacker.GetComponent<Mon_Attack>().Attack_delay = 0f;
-            Attacker.GetComponent<Mon_Move>().AttackAble = false;
+            Attacker.GetComponent<Mon_Move>().nowState = Mon_Move.State.Idle;
             Attacker.GetComponent<Obj_State>().spawn();
         }
     }

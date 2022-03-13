@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Obj_Function Obj_Fun;
     [HideInInspector] public User_Info Info; // 유저정보를 가진 오브젝트
     [HideInInspector] public OutLine_Change OutLine; // 아웃라인 관련 스크립트
-    [HideInInspector]public Save_Data My_Save;
+    [HideInInspector] public Save_Data My_Save;
 
     public Button Save;
 
@@ -69,7 +69,15 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject()) // 오른쪽 마우스를 클릭하고 클릭한 위치에 UI가 없을때
         {
             Char_function.MousePos(Player.transform.position, ref TargetPos);
-            StartCoroutine("Effect_Make", TargetPos);
+        }
+    }
+    private void LateUpdate()
+    {
+        if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject()) // 오른쪽 마우스를 클릭하고 클릭한 위치에 UI가 없을때
+        {
+            Vector3 tmp = TargetPos;
+            tmp.y = 0.22f;
+            StartCoroutine("Effect_Make", tmp);
         }
     }
 

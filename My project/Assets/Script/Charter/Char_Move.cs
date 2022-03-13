@@ -63,7 +63,7 @@ public class Char_Move : MonoBehaviour
         {
             myAtk.Player_Attack();
         }
-        else if(dis < 0.05f && !myAtk.now_fight) // 공격중이 아니고 거리가 0.05f보다 가까울때
+        else if(dis < 0.1f && !myAtk.now_fight) // 공격중이 아니고 거리가 0.05f보다 가까울때
         {
             transform.position = TargetPos;
         }

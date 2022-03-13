@@ -13,6 +13,7 @@ public class UI_Inventory : MonoBehaviour
     [Header("소지금")]
     public Text myMoney;
 
+
     public void Get_InvenLoding()
     {
         InventoryLoding();
@@ -28,7 +29,7 @@ public class UI_Inventory : MonoBehaviour
         {
             Load_Inventory();
             reload_Inventory();
-            await Task.Delay(60000); //60초마다 세이브 로드를 반복
+            await Task.Delay(1000); //1초마다 세이브 로드를 반복
             Save_Inventory();
 
 #if UNITY_EDITOR
@@ -60,10 +61,12 @@ public class UI_Inventory : MonoBehaviour
             if (Inven.Inventory[i].Item_Code != GameManager.Instance.Ui_Manager.Find_Item_Code(Icons[i].texture.name)) // UI의 코드가 저장된 데이터의 코드와 다를경우
             {
                 Inven.Inventory[i].Item_Code = GameManager.Instance.Ui_Manager.Find_Item_Code(Icons[Inven.Inventory[i].Order].texture.name);
-                Inven.Money = 0;
                 b = false;   // 한번이라도 값이 바뀐적이 있다면 false 값이 나온다.
             }
         }
+
+        if (int.Parse(myMoney.text) != Inven.Money)
+            b = false;
 
         if (!b)
         {
@@ -77,7 +80,8 @@ public class UI_Inventory : MonoBehaviour
     /// </summary>
     public void reload_Inventory()
     {
-        foreach(Inventory_Item item in Inven.Inventory)
+        myMoney.text = Inven.Money.ToString();
+        foreach (Inventory_Item item in Inven.Inventory)
         {
             if (item.Item_Code != "")
             {
@@ -88,7 +92,6 @@ public class UI_Inventory : MonoBehaviour
                 Icons[item.Order].texture = GameManager.Instance.Ui_Manager.Black_Item;
             }
         }
-        myMoney.text = Inven.Money.ToString();
     }
 
     public void AddMoney(int a)

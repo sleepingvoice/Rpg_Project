@@ -49,6 +49,7 @@ public class UI_Manager : MonoBehaviour
     {
         Bar_Update();
         Manager_Setting.Setting_Update();
+        Manager_State.Update_Function();
     }
 
     private void Bar_Update()
@@ -77,10 +78,6 @@ public class UI_Manager : MonoBehaviour
             return;
         }
         Obj_State Monster_state = Monster.GetComponent<Obj_State>();
-        foreach (KeyValuePair<string, float> pair in Monster_state.Health_Map)
-        {
-            Debug.Log(Monster.name + "/" + pair.Value);
-        }
         float max = Monster_state.Health_Map["MaxHp"];
         float now = Monster_state.Health_Map["Hp"];
 

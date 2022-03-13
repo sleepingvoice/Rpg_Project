@@ -89,7 +89,6 @@ public class UI_Equip : MonoBehaviour
 
         UI_Manager my_UI = GameManager.Instance.Ui_Manager;
         Data myWeapons = my_UI.FindItem(Item_Code);
-        Debug.Log(myWeapons.PrefabName);
         foreach (GameObject obj in GameManager.Instance.Player.GetComponent<Char_Weapons>().myWeapons)
         {
             obj.SetActive(false);
@@ -152,6 +151,9 @@ public class UI_Equip : MonoBehaviour
             if(equip.Item_Code!="")
             {
                 raw.texture = GameManager.Instance.Ui_Manager.Find_Item_Img(equip.Item_Code);
+                
+                Change_Weapons(equip.Item_Code, Change_Equip_Item(equip.Item_Code).name);
+                Debug.Log("로드~");
             }
         }
     }

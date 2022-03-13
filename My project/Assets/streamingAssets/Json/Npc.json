@@ -2,16 +2,16 @@
   "Npc": [
     {
       "Obj_name": "NPC_01",
-      "Char_name": "페어리1",
-      "Line": [ "첫번째 대사", "두번째 대사", "세번째 대사" ],
-      "Button_Function": [ "Shop", "Quest" , "End" ],
+      "Char_name": "상점 페어리",
+      "Line": [ "안녕하세요", "살것이 있으신가요?"],
+      "Button_Function": [ "Shop", "End" ],
       "Prefeb_img_name": ""
     },
     {
       "Obj_name": "NPC_02",
-      "Char_name": "페어리2",
-      "Line": [ "첫번째 대사", "두번째 대사", "세번째 대사" ],
-      "Button_Function": [ "Shop", "Quest" , "End" ],
+      "Char_name": "페어리 장로",
+      "Line": [ "그거 아세요 모험가님?", "옆에 있는 폐광에서 무서운 몬스터가 나타난데요!"],
+      "Button_Function": [ "End" ],
       "Prefeb_img_name": ""
     }
   ]

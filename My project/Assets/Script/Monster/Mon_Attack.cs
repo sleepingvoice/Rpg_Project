@@ -10,7 +10,7 @@ public class Mon_Attack : MonoBehaviour
     public GameObject Range_Obj;                 // 공격 거리 체크 오브젝트
     public bool FirstAttack;                     // 선공 여부
 
-    [HideInInspector]public float Attack_delay;                   // 공격 후 딜레이시간
+    [HideInInspector]public float Attack_delay;  // 공격 후 딜레이시간
     private Action Delay;                        // 딜레이 업데이트에 돌리는용도
     private Obj_State my_state;
 
@@ -67,7 +67,7 @@ public class Mon_Attack : MonoBehaviour
             if (Range.PlayerOnOff)
             {
                 Player = Range.Player;
-                GetComponent<Mon_Move>().AttackAble = true;
+                GetComponent<Mon_Move>().nowState = Mon_Move.State.Fight;
             }
         }
 
@@ -75,7 +75,7 @@ public class Mon_Attack : MonoBehaviour
         if (Player != null && !Range.PlayerOnOff)
         {
             Player = null;
-            GetComponent<Mon_Move>().AttackAble = false;
+            GetComponent<Mon_Move>().nowState = Mon_Move.State.Idle;
         }
     }
 

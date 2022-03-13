@@ -50,6 +50,11 @@ public class Mon_Spawn : MonoBehaviour
 
     public IEnumerator Die_Respawn(GameObject DieMonster)
     {
+        DieMonster.GetComponent<Mon_Attack>().Player = null;
+        DieMonster.GetComponent<Mon_Move>().nowState = Mon_Move.State.Stop;
+
+        yield return new WaitForSeconds(2f);
+
         Monster_Die.Add(DieMonster);
         DieMonster.SetActive(false);
         
@@ -60,6 +65,8 @@ public class Mon_Spawn : MonoBehaviour
         DieMonster.gameObject.SetActive(true);
         DieMonster.GetComponent<Obj_State>().spawn();
         DieMonster.GetComponent<Mon_Attack>().Attack_delay = 0f;
+        DieMonster.GetComponent<Mon_Move>().nowState = Mon_Move.State.Idle;
+
         Monster_Die.RemoveAt(0);
     }
 }

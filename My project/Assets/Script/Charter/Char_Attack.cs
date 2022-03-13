@@ -49,13 +49,17 @@ public class Char_Attack : MonoBehaviour
         {
             now_fight = true;
 
-            GameManager.Instance.TargetPos = nearMonster.transform.position;
+            Vector3 TmpPos = nearMonster.transform.position;
+            TmpPos.y = GameManager.Instance.Player.transform.position.y;
+
+
+            GameManager.Instance.TargetPos = TmpPos;
             GameManager.Instance.OutLine.Change_OutLine(nearMonster, 150f); // 공격하는 몬스터의 테두리를 생성한다.
             GameManager.Instance.OutLine.Add_OutLineList(nearMonster);
 
             float dis = Vector3.Distance(nearMonster.transform.position, transform.position);
-            
-            if(dis <= 0.5f && Attack_delay >= my_state.Atk_Time) // 만약 거리가 가깝고 플레이어가 공격이 가능하다면
+
+            if(dis <= 0.8f && Attack_delay >= my_state.Atk_Time) // 만약 거리가 가깝고 플레이어가 공격이 가능하다면
                 return true;
 
             return false;
@@ -74,7 +78,7 @@ public class Char_Attack : MonoBehaviour
         Delay += delayTime;       // action 공격 시간을 측정하는 함수를 추가한다.
         GameManager.Instance.Obj_Fun.Attack(nearMonster, transform.gameObject);
         nearMonster.GetComponent<Mon_Attack>().Player = transform.gameObject;
-        nearMonster.GetComponent<Mon_Move>().AttackAble = true;
+        nearMonster.GetComponent<Mon_Move>().nowState = Mon_Move.State.Fight;
         nearMonster.GetComponent<Mon_Attack>().FirstDelay();
         GameManager.Instance.My_Sound.SE_Sound_Change("Attack").Play(); // 공격하는 사운드를 출력한다.
 

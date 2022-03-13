@@ -17,6 +17,10 @@ public class UI_State : MonoBehaviour
     public void Awake_Fuction()
     {
         Play_State = GameManager.Instance.Player.GetComponent<Obj_State>();
+    }
+
+    public void Update_Function()
+    {
         UpdateState();
     }
 
@@ -27,6 +31,10 @@ public class UI_State : MonoBehaviour
     /// </summary>
     public void State_Btk_Set()
     {
+        foreach(Button btk in UpBtk)
+        {
+            btk.onClick.RemoveAllListeners();
+        }
         UpBtk[0].onClick.AddListener(() => UpState("Str"));
         UpBtk[1].onClick.AddListener(() => UpState("Dex"));
         UpBtk[2].onClick.AddListener(() => UpState("Int"));
@@ -56,9 +64,10 @@ public class UI_State : MonoBehaviour
         Play_State.Health_Map[s] += 1f;
         Play_State.Health_Map["LestPlusStats"]--;
         Play_State.inputValue();
+        Play_State.Roboot();
         UpdateState();
         Save_state();
-        if (Play_State.Health_Map["LestPlusStats"]<=0)
+        if (Play_State.Health_Map["LestPlusStats"] <= 0)
         {
             Plus_Stats_Btk_OnOff(false);
         }
@@ -111,6 +120,7 @@ public class UI_State : MonoBehaviour
         Play_State.Hp = state.nowHp;
         Play_State.Mp = state.nowMp;
         Play_State.gameObject.transform.position = state.Position;
+        GameManager.Instance.TargetPos = state.Position;
         Play_State.Roboot();
     }
 
