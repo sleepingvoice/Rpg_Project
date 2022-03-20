@@ -120,11 +120,10 @@
     <Compile Include="Assets\Script\Encoding\Encoding_AES_Crypto.cs" />
     <Compile Include="Assets\Script\Encoding\Encoding_Base.cs" />
     <Compile Include="Assets\Script\Encoding\Encoding_Class.cs" />
-    <Compile Include="Assets\Script\Encoding\Encoding_Manager.cs" />
+    <Compile Include="Assets\Script\Encoding\Encoding_Text.cs" />
     <Compile Include="Assets\Script\Encoding\Test.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\Login\Login_Manager.cs" />
-    <Compile Include="Assets\Script\Login\Register.cs" />
     <Compile Include="Assets\Script\Login\User_Info.cs" />
     <Compile Include="Assets\Script\Monster\Mon_Attack.cs" />
     <Compile Include="Assets\Script\Monster\Mon_AttackRange.cs" />

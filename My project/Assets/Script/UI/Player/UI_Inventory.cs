@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Base_Class;
-using System.IO;
-using System.Threading.Tasks;
+using System.Collections;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -16,27 +15,20 @@ public class UI_Inventory : MonoBehaviour
 
     public void Get_InvenLoding()
     {
-        InventoryLoding();
+        Load_Inventory();
     }
 
     /// <summary>
-    /// 인벤토리 상태를 json에 갱신하는 함수(비동기식)
+    /// 인벤토리 상태를 저장하고 갱신하는 함수
     /// </summary>
-    private async void InventoryLoding()
+    public IEnumerator Inventory_Loding()
     {
-        await Task.Delay(1000);
+        yield return new WaitForSeconds(1);
         while (true)
         {
-            Load_Inventory();
             reload_Inventory();
-            await Task.Delay(1000); //1초마다 세이브 로드를 반복
+            yield return new WaitForSeconds(1);
             Save_Inventory();
-
-#if UNITY_EDITOR
-            if (UnityEditor.EditorApplication.isPlaying == false)
-                return;
-#endif
-
         }
     }
 
@@ -45,8 +37,8 @@ public class UI_Inventory : MonoBehaviour
     /// </summary>
     public void Load_Inventory()
     {
-        string str = File.ReadAllText(Application.persistentDataPath + "/Inventory.json");
-        Inven = JsonUtility.FromJson<Inventory_Items>(str);
+        if(User_Info.Instance != null)
+            Inven = JsonUtility.FromJson<Inventory_Items>(User_Info.Instance.save.Player_Data["Inven"]);
     }
 
 
@@ -65,14 +57,12 @@ public class UI_Inventory : MonoBehaviour
             }
         }
 
-        if (int.Parse(myMoney.text) != Inven.Money)
+        if (int.Parse(myMoney.text) != Inven.Money) // 인벤토리의 돈과 화면에 표시된 돈이 다를 때
             b = false;
 
-        if (!b)
-        {
-            Debug.Log("저장중...");
-            File.WriteAllText(Application.persistentDataPath + "/Inventory.json", JsonUtility.ToJson(Inven)); // Json을 현재 상태로 바꾸고 Josn에 저장
-        }
+        if (!b&& User_Info.Instance != null)
+            User_Info.Instance.save.Player_Data["Inven"] = JsonUtility.ToJson(Inven);
+
     }
 
     /// <summary>

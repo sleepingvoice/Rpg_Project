@@ -34,6 +34,7 @@ public class UI_Manager : MonoBehaviour
     private void Awake_Fuction()
     {
         Manager_Inven.Get_InvenLoding();
+        StartCoroutine(Manager_Inven.Inventory_Loding());
         Manager_State.Awake_Fuction();
     }
 
@@ -89,8 +90,6 @@ public class UI_Manager : MonoBehaviour
         else
             Monster_Bar.SetActive(false);
     }
-
-
 
     private void Check_Code()
     {

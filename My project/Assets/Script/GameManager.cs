@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public OutLine_Change OutLine; // 아웃라인 관련 스크립트
     [HideInInspector] public Save_Data My_Save;
 
-    public Button Save;
+    public Button Quit;
 
     private GameObject Effect_Click;
     private void Awake()
@@ -37,19 +37,14 @@ public class GameManager : MonoBehaviour
         TargetPos = Player.transform.position;
         Obj_Fun = GetComponent<Obj_Function>();
         OutLine = GetComponent<OutLine_Change>();
-
-        Save.onClick.AddListener(() => Ui_Manager.Manager_Inven.Save_Inventory());
-        Save.onClick.AddListener(() => Ui_Manager.Manager_Setting.Save_Setting_Value());
+        Quit.onClick.AddListener(() => Application.Quit());
 
         if (User_Info.Instance != null)
         {
             Info = User_Info.Instance;
             My_Save = Info.save;
-            Save.onClick.AddListener(() => My_Save.Save_UserData());
-            Save.onClick.AddListener(() => Application.Quit());
+            Quit.onClick.AddListener(() => User_Info.Instance.save.Save_UserData());
         }
-
-        
     }
 
     public static GameManager Instance

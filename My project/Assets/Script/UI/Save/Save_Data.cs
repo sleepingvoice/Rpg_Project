@@ -1,77 +1,88 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using UnityEngine.Networking;
-
 using Base_Class;
 
 public class Save_Data : MonoBehaviour
 {
-    [HideInInspector]public string user_Code;           // 유저 코드
     private string Normal_Url = "http://localhost/Test/";
     private Dictionary<string, string> Init_Json;
+    private Encoding_Base _EncodingComponent;
+
+    private string User_Id;
+    private string User_PassWord;
+
+    public Dictionary<string, string> Player_Data;
 
     private void Start()
     {
-        user_Code = "";
         Init_Dictionary();
         StartCoroutine(Init_ItemCode());
     }
 
-    public void Load_UserData()
+    public void Load_UserData(string Id_text, string Pass_text)
     {
-        StartCoroutine(Load_User_Info());
+        User_Id = Id_text;
+        User_PassWord = Pass_text;
+
+        StartCoroutine(Load_User_Info(User_Id, User_PassWord));
     }
 
     public void Save_UserData()
     {
-        StartCoroutine(Save_User_Info());
+        StartCoroutine(Save_User_Info(User_Id, User_PassWord));
     }
 
 
     #region 서버에 저장,로드
 
     /// <summary>
-    /// 서버에 저장된 유저의 json값을 불러오는 함수
+    /// 서버에 저장된 유저의 데이터를 불러오는 함수
     /// </summary>
-    private IEnumerator Load_User_Info()
+    private IEnumerator Load_User_Info(string Id, string Pass)
     {
         WWWForm my_State = new WWWForm();
-        my_State.AddField("User_Code", user_Code);
+        my_State.AddField("ID_Post", Id);
+        my_State.AddField("PassWord_Post", Pass);
         UnityWebRequest CheckCode = UnityWebRequest.Post(Normal_Url + "Load_UserInfo.php", my_State);
 
         yield return CheckCode.SendWebRequest();
 
-        List<string> json = divide_Base64(CheckCode.downloadHandler.text); // echo로 나타나는 값은 여러개가 합쳐져있기에 나누어 준다.
-        for (int i = 0; i < json.Count; i++)
-        {
-            json[i] = Decoding_Base64(json[i]);
-        }
+        List<string> json = divide_Data(CheckCode.downloadHandler.text); // echo로 나타나는 값은 여러개가 합쳐져있기에 나누어 준다.
 
-        File.WriteAllText(Application.persistentDataPath + "/State.json", Init_Check(json[0] , "State"));
-        File.WriteAllText(Application.persistentDataPath + "/Inventory.json", Init_Check(json[1] , "Inven"));
-        File.WriteAllText(Application.persistentDataPath + "/Equip.json", Init_Check(json[2], "Equip"));
+        Init_List(json);
+        KeyCheck(json);
+
+        Player_Data = new Dictionary<string, string>();
+        Player_Data.Add("State", json[0]);
+        Player_Data.Add("Inven", json[1]);
+        Player_Data.Add("Equip", json[2]);
+
+
+        SaveData_To_Sever();
     }
 
 
     /// <summary>
-    /// 유저의 json값을 서버에 저장하는 함수
+    /// 유저의 데이터를 서버에 저장하는 함수
     /// </summary>
-    private IEnumerator Save_User_Info()
+    private IEnumerator Save_User_Info(string Id, string Pass)
     {
-        string post_state = Incoding_Base64(File.ReadAllText(Application.persistentDataPath + "/State.json")); // josn값을 서버에 보내기위해 base64형태로 암호화한다.
-        string post_Inven = Incoding_Base64(File.ReadAllText(Application.persistentDataPath + "/Inventory.json"));
-        string post_equip = Incoding_Base64(File.ReadAllText(Application.persistentDataPath + "/Equip.json"));
+        string post_state = User_Info.Instance.myEncoding.EncodingText(Player_Data["State"]);
+        string post_Inven = User_Info.Instance.myEncoding.EncodingText(Player_Data["Inven"]);
+        string post_equip = User_Info.Instance.myEncoding.EncodingText(Player_Data["Equip"]);
 
         WWWForm myState = new WWWForm();
-        myState.AddField("User_code_Post", user_Code);
+        myState.AddField("ID_Post", Id);
+        myState.AddField("PassWord_Post", Pass);
+
         myState.AddField("State_Post", post_state);
         myState.AddField("Inven_Post", post_Inven);
         myState.AddField("Equip_Post", post_equip);
+
+        myState.AddField("KeyCheck_Post",User_Info.Instance.myEncoding.EncodingText("KeyCheck"));
 
         UnityWebRequest SaveState = UnityWebRequest.Post(Normal_Url + "Save_UserInfo.php", myState);
 
@@ -82,32 +93,26 @@ public class Save_Data : MonoBehaviour
         else
             Debug.Log("세이브!");
     }
-    #endregion
-
-    #region Base64기반 암복호화
 
     /// <summary>
-    /// string을 base64형태로 인코딩
+    /// 플레이어의 데이터를 서버에 10초마다 저장하는 비동기식 함수
     /// </summary>
-    private string Incoding_Base64(string s)
+    private async void SaveData_To_Sever()
     {
-        byte[] arr = Encoding.UTF8.GetBytes(s);
-        return System.Convert.ToBase64String(arr);
+        await Task.Delay(10000);
+        while (true)
+        {
+#if UNITY_EDITOR
+            if (UnityEditor.EditorApplication.isPlaying == false)
+                return;
+#endif
+
+            Save_UserData();
+            Load_UserData(User_Id, User_PassWord);
+            await Task.Delay(10000); //10초마다 데이터를 서버에 저장
+        }
     }
 
-    /// <summary>
-    /// base64를 string형태로 디코딩
-    /// </summary>
-    private string Decoding_Base64(string s)
-    {
-        if (s == "")
-            return s;
-        string st1 = s.Replace("\n", "");                      
-        st1 = st1.Replace("\r", "");                             // 서버에서 날라온 값의 앞에 엔터가 되어있으므로 그것을 제외해준다.
-        st1 += new string('=', (4 - st1.Length % 4)%4);              // 값이 유니티의 base64형태의 기준과 맞지 않기에 바꿔준다.
-        byte[] arr = Convert.FromBase64String(st1);
-        return Encoding.UTF8.GetString(arr);
-    }
     #endregion
 
     #region 보조함수
@@ -115,13 +120,13 @@ public class Save_Data : MonoBehaviour
     /// <summary>
     /// 서버에서 보낸 값을 나누어주는 함수
     /// </summary>
-    private List<string> divide_Base64(string s)
+    private List<string> divide_Data(string s)
     {
         List<string> arr = new List<string>();
         string tmp = "";
         for(int i=0;i<s.Length; i++)
         {
-            if(s[i]=='/')
+            if(s[i]==' ')
             {
                 arr.Add(tmp);
                 tmp = "";
@@ -133,6 +138,18 @@ public class Save_Data : MonoBehaviour
         }
         return arr;
     }
+    
+    /// <summary>
+    /// 나누어진 값을 체크한 후 값이 없다면 초기화된 값을 넣어주고 값이 있다면 복호화후 돌려준다
+    /// </summary>
+    private List<string> Init_List(List<string> json)
+    {
+        json[0] = Init_Check(User_Info.Instance.myEncoding.DecodingText(json[0]), "State");
+        json[1] = Init_Check(User_Info.Instance.myEncoding.DecodingText(json[1]), "Inven");
+        json[2] = Init_Check(User_Info.Instance.myEncoding.DecodingText(json[2]), "Equip");
+        json[3] = Init_Check(User_Info.Instance.myEncoding.DecodingText(json[3]), "KeyCheck");
+        return json;
+    }
 
     /// <summary>
     /// json값을 받아서 비어있을경우 초기화시켜주는 함수
@@ -140,9 +157,26 @@ public class Save_Data : MonoBehaviour
     /// </summary>
     private string Init_Check(string json,string init_name)
     {
-        if(json == "")
+        if(json == string.Empty)
         {
+            Debug.Log(Init_Json[init_name]);
             return Init_Json[init_name];
+        }
+        return json;
+    }
+
+    /// <summary>
+    /// 키값이 제대로 들어왔는지 체크하는 함수
+    /// </summary>
+    private List<string> KeyCheck(List<string> json)
+    {
+        if (json[3] != "KeyCheck")
+        {
+            Debug.LogError("잘못된 키값입니다.");
+
+            json[0] = Init_Json["State"];
+            json[1] = Init_Json["Inven"];
+            json[2] = Init_Json["Equip"];
         }
         return json;
     }
@@ -218,6 +252,7 @@ public class Save_Data : MonoBehaviour
         Init_Json.Add("State", init_State());
         Init_Json.Add("Equip", Init_Equip());
         Init_Json.Add("Inven", init_Inventory());
+        Init_Json.Add("KeyCheck", "KeyCheck");
     }
 
     /// <summary>
@@ -230,22 +265,15 @@ public class Save_Data : MonoBehaviour
         UnityWebRequest CheckCode = UnityWebRequest.Post(Normal_Url + "Load_GameDataBase.php", my_Data);
 
         yield return CheckCode.SendWebRequest();
-
-        string s = Decoding_Base64(CheckCode.downloadHandler.text);
-
-        File.WriteAllText(Application.persistentDataPath + "/Item_Code.json", s);
     }
 
     private IEnumerator Save_itemCode()
     {
-        string s = Incoding_Base64(File.ReadAllText(Application.persistentDataPath + "/Item_Code.json"));
         WWWForm myData = new WWWForm();
         myData.AddField("Name_Post", "ItemCode");
-        myData.AddField("Value_Post", s);
 
-        UnityWebRequest SaveState = UnityWebRequest.Post(Normal_Url + "Save_GameDataBase.php", myData);
 
-        yield return SaveState.SendWebRequest();
+        yield return null;
     }
 
     #endregion

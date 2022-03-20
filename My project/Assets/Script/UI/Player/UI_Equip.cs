@@ -134,7 +134,12 @@ public class UI_Equip : MonoBehaviour
             Debug.Log(tmp.Item_Code + " " +tmp.Part);
             my_Equip.myEquip.Add(tmp);
         }
-        File.WriteAllText(Application.persistentDataPath + "/Equip.json", JsonUtility.ToJson(my_Equip));
+        string s = JsonUtility.ToJson(my_Equip);
+
+        if (User_Info.Instance != null)
+        {
+            User_Info.Instance.save.Player_Data["Equip"] = s;
+        }
     }
 
     /// <summary>
@@ -142,8 +147,10 @@ public class UI_Equip : MonoBehaviour
     /// </summary>
     private void Equip_Load()
     {
-        string str = File.ReadAllText(Application.persistentDataPath + "/Equip.json");
-        my_Equip = JsonUtility.FromJson<Equipes>(str);
+        if (User_Info.Instance == null)
+            return;
+
+        my_Equip = JsonUtility.FromJson<Equipes>(User_Info.Instance.save.Player_Data["Equip"]);
 
         foreach(var equip in my_Equip.myEquip)
         {
@@ -153,7 +160,6 @@ public class UI_Equip : MonoBehaviour
                 raw.texture = GameManager.Instance.Ui_Manager.Find_Item_Img(equip.Item_Code);
                 
                 Change_Weapons(equip.Item_Code, Change_Equip_Item(equip.Item_Code).name);
-                Debug.Log("로드~");
             }
         }
     }

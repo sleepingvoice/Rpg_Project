@@ -101,7 +101,11 @@ public class UI_State : MonoBehaviour
         state.Position = Play_State.gameObject.transform.position;
 
         string json = JsonUtility.ToJson(state);
-        File.WriteAllText(Application.persistentDataPath + "/State.json", json);
+
+        if (User_Info.Instance != null)
+        {
+            User_Info.Instance.save.Player_Data["State"] = json;
+        }
     }
 
     /// <summary>
@@ -109,7 +113,13 @@ public class UI_State : MonoBehaviour
     /// </summary>
     public void Load_state()
     {
-        My_State state = JsonUtility.FromJson<My_State>(File.ReadAllText(Application.persistentDataPath + "/State.json"));
+        My_State state = new My_State();
+
+        if (User_Info.Instance != null)
+            state = JsonUtility.FromJson<My_State>(User_Info.Instance.save.Player_Data["State"]);
+        else
+            return;
+
         Play_State.Exp = state.Exp;
         Play_State.Lv = state.Lv;
         Play_State.total_Exp = state.total_Exp;

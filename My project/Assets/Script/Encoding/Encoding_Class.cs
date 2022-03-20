@@ -2,7 +2,7 @@
 using System;
 using System.Text;
 using System.Security.Cryptography;
-using System.IO;
+using UnityEngine;
 public class Encoding_Class
 {
 	static Dictionary<string, Encoding_AES_Crypto> aesManages = new Dictionary<string, Encoding_AES_Crypto>();
@@ -36,9 +36,7 @@ public class Encoding_Class
 	public static string DecodingAESByBase64Key(string encryptData, string base64Key, string base64IV)
 	{
 		if (aesManages.ContainsKey(base64Key) == false)
-		{
-			return string.Empty;
-		}
+			CreateAESManage(base64Key, base64IV);
 
 		return aesManages[base64Key].Decrypt(encryptData);
 	}

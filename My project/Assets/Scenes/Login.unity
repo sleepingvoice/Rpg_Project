@@ -2017,6 +2017,8 @@ GameObject:
   - component: {fileID: 806535368}
   - component: {fileID: 806535370}
   - component: {fileID: 806535371}
+  - component: {fileID: 806535373}
+  - component: {fileID: 806535372}
   m_Layer: 0
   m_Name: User_Info_Manager
   m_TagString: Untagged
@@ -2037,6 +2039,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   User_Code: 
+  myEncoding: {fileID: 0}
+  IVKey: AESInitialValues
 --- !u!4 &806535369
 Transform:
   m_ObjectHideFlags: 0
@@ -2075,7 +2079,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885b65fcf4fbbfd479ab863f9c086d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  user_Code: 
+--- !u!114 &806535372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806535367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e87a658cbadc54f8e88fd976d3f322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aesBase64Key: TG9nSURjb2RlSzAwMDAwMQ==
+  aesBase64IV: 
+--- !u!114 &806535373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806535367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa9f2dae0492e954bbb5ddae4ce4292b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &828868762
 GameObject:
   m_ObjectHideFlags: 0
