@@ -108,14 +108,14 @@ public class Save_Data : MonoBehaviour
 #endif
 
             Save_UserData();
-            Load_UserData(User_Id, User_PassWord);
+
             await Task.Delay(10000); //10초마다 데이터를 서버에 저장
         }
     }
 
     #endregion
 
-    #region 보조함수
+    #region 보조함수    
 
     /// <summary>
     /// 서버에서 보낸 값을 나누어주는 함수

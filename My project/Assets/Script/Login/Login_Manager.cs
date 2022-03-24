@@ -71,7 +71,7 @@ public class Login_Manager : MonoBehaviour
 		yield return CheckID.SendWebRequest();
 
 		string b = CheckResult(CheckID.downloadHandler.text); // 성공인지 실패인지를 받아온다.
-		if(b != "false") // 만약 실패하지않았다면 아이디가 존재하는 것이므로
+		if(b != "false") // 만약 실패하지않았다면 키값이 존재하는 것이므로
         {
 			User_Info.Instance.myEncoding.Set_KeyBase64(b); // 넘어온 aes 보안 키값을 base64로 변경시켜 넣어준다
 			User_Info.Instance.save.Load_UserData(Log_Id.text,Log_PassWord.text);

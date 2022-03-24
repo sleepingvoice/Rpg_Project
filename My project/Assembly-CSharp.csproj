@@ -143,6 +143,9 @@
     <Compile Include="Assets\Script\UI\Player\UI_ItemCodeBase.cs" />
     <Compile Include="Assets\Script\UI\Player\UI_Manager.cs" />
     <Compile Include="Assets\Script\UI\Player\UI_Mouse.cs" />
+    <Compile Include="Assets\Script\UI\Player\UI_Notice.cs" />
+    <Compile Include="Assets\Script\UI\Player\UI_Notice_Toolbar.cs" />
+    <Compile Include="Assets\Script\UI\Player\UI_Notice_Window.cs" />
     <Compile Include="Assets\Script\UI\Player\UI_Setting.cs" />
     <Compile Include="Assets\Script\UI\Player\UI_State.cs" />
     <Compile Include="Assets\Script\UI\Save\Save_Data.cs" />

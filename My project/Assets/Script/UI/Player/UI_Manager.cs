@@ -12,11 +12,12 @@ public class UI_Manager : MonoBehaviour
     public GameObject Bar_Mp;
     public GameObject Bar_Exp;
     [Header("관리하는 매니저")]
-    public UI_Equip Manager_Equip;
-    public UI_Inventory Manager_Inven;
-    public UI_State Manager_State;
-    public UI_Setting Manager_Setting;
-    private UI_Mouse Manager_Mouse;
+    public UI_Equip Manager_Equip; // 장비
+    public UI_Inventory Manager_Inven; // 인벤토리
+    public UI_State Manager_State; // 스탯창
+    public UI_Setting Manager_Setting; // 세팅창
+    public UI_Notice Manager_Notice; // 공지사항
+    private UI_Mouse Manager_Mouse; // UI 마우스 클릭
 
     [Header("빈칸 이미지")]
     public Texture Black_Item; // 인벤토리 빈칸 텍스쳐
@@ -36,6 +37,7 @@ public class UI_Manager : MonoBehaviour
         Manager_Inven.Get_InvenLoding();
         StartCoroutine(Manager_Inven.Inventory_Loding());
         Manager_State.Awake_Fuction();
+        StartCoroutine(Manager_Notice.Notice_Text());
     }
 
     private void Start()
@@ -44,6 +46,7 @@ public class UI_Manager : MonoBehaviour
         Manager_Equip.Start_Equip();
         Manager_Setting.Load_Setting_Value();
         Manager_State.Load_state();
+        Manager_Notice.gameObject.SetActive(true);
     }
 
     private void Update()
