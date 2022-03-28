@@ -157,16 +157,15 @@ public class Save_Data : MonoBehaviour
     /// </summary>
     private string Init_Check(string json,string init_name)
     {
-        Debug.Log(json);
+        
         if(json == string.Empty)
         {
             return Init_Json[init_name];
         }
         else
         {
-            User_Info.Instance.myEncoding.DecodingText(json);
+            return User_Info.Instance.myEncoding.DecodingText(json);
         }
-        return json;
     }
 
     /// <summary>
@@ -176,6 +175,7 @@ public class Save_Data : MonoBehaviour
     {
         if (json[3] != "KeyCheck")
         {
+            Debug.Log(json[3]);
             Debug.LogError("잘못된 키값입니다.");
 
             json[0] = Init_Json["State"];
