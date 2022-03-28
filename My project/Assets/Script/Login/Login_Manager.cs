@@ -105,7 +105,7 @@ public class Login_Manager : MonoBehaviour
 		Debug.Log(s);
 
 		if(s== "false")
-			Reg_Error_SameID.SetActive(false);
+			Reg_Error_SameID.SetActive(true);
 		else
 			Reg_Success.SetActive(true);
 

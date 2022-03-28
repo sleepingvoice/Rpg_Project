@@ -144,10 +144,10 @@ public class Save_Data : MonoBehaviour
     /// </summary>
     private List<string> Init_List(List<string> json)
     {
-        json[0] = Init_Check(User_Info.Instance.myEncoding.DecodingText(json[0]), "State");
-        json[1] = Init_Check(User_Info.Instance.myEncoding.DecodingText(json[1]), "Inven");
-        json[2] = Init_Check(User_Info.Instance.myEncoding.DecodingText(json[2]), "Equip");
-        json[3] = Init_Check(User_Info.Instance.myEncoding.DecodingText(json[3]), "KeyCheck");
+        json[0] = Init_Check(json[0].Trim(), "State");
+        json[1] = Init_Check(json[1].Trim(), "Inven");
+        json[2] = Init_Check(json[2].Trim(), "Equip");
+        json[3] = Init_Check(json[3].Trim(), "KeyCheck");
         return json;
     }
 
@@ -157,10 +157,14 @@ public class Save_Data : MonoBehaviour
     /// </summary>
     private string Init_Check(string json,string init_name)
     {
+        Debug.Log(json);
         if(json == string.Empty)
         {
-            Debug.Log(Init_Json[init_name]);
             return Init_Json[init_name];
+        }
+        else
+        {
+            User_Info.Instance.myEncoding.DecodingText(json);
         }
         return json;
     }
