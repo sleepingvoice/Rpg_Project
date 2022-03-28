@@ -12,50 +12,40 @@ public class Char_function : MonoBehaviour
     /// </summary>
     public static void MousePos(Vector3 StartPos, ref Vector3 TargetPos)
     {
-        int layerMask = 1 << LayerMask.NameToLayer("Wall");
+        int layerMask = 1 << LayerMask.NameToLayer("Floor");
         Ray ray = GameManager.Instance.mainCam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 10000f, layerMask)) // 카메라로부터 레이를 쏴서 벽이 맞는다면
+        Debug.DrawRay(GameManager.Instance.mainCam.transform.position, Input.mousePosition, Color.red);
+        if (Physics.Raycast(ray, out RaycastHit hit, 10000f, layerMask)) // 카메라로부터 레이를 쏴서 땅이 맞는다면
         {
-            TargetPos = PosCorrect(StartPos, hit.point);
+            TargetPos = PosCorrect_Final(StartPos, hit.point);
         }
     }
-
+    
     /// <summary>
-    /// 시작 위치와 타겟위치를 판정하여 중간에 걸리는 것이 있다면 
-    /// 걸리는 것의 앞으로 이동하는 함수
+    /// 클릭한 지점과 플레이어 사이에 물체가 있으면 물체의 앞으로 위치를 보정하는 함수
     /// </summary>
-    private static Vector3 PosCorrect(Vector3 StartPos ,Vector3 TargetPos)
+    private static Vector3 PosCorrect_Final(Vector3 StartPos, Vector3 TargetPos)
     {
-        TargetPos.y = StartPos.y;
+        float tmpY = StartPos.y; // 원래 높이를 저장
+
+        TargetPos.y = 0.5f; // 원래 높이로 레이를 쏘게되면 바닥으로 쏘게 되기 때문에 플레이어의 중심점 높이로 보정시켜준다.
+        StartPos.y = 0.5f;
         Vector3 Dir = TargetPos - StartPos;
-        Dir.y = 1f;
-        float Dis = Vector3.Distance(TargetPos, StartPos); // 플레이어의 위치에서 타겟의 위치까지의 방향
         Dir = Dir.normalized;
-        RaycastHit hit;
-
-        if (Physics.Raycast(StartPos, Dir, out hit, Dis)) // 플레이어의 위치에서 목표한 지점 방향에 물체가 존재한다면
-        {
-            if (hit.transform.gameObject.layer == 10) // 만약 물체가 Wall 이면
-            {
-                return CorrectPos(StartPos, hit.transform.position);
-            }
+        float Dis = Vector3.Distance(TargetPos, StartPos);
+        int layerMask = (-1) - (1 << LayerMask.NameToLayer("Floor")); // 바닥을 제외한 나머지 레이어
+        
+        if (Physics.Raycast(StartPos, Dir, out RaycastHit hit, Dis, layerMask)) {
+            // 플레이어의 위치에서 목표한 지점 방향으로 ray를 쏴서 다른 물체를 탐색한다.
+            Vector3 Dir_hit = StartPos - hit.point;
+            Dir_hit = Dir_hit.normalized * 0.2f;
+            Vector3 tmpVector = hit.point + Dir_hit;
+            tmpVector.y = tmpY;
+            return tmpVector;
         }
-        return TargetPos;
-    }
+        TargetPos.y = tmpY;
+        return TargetPos; // 만약 레이를 쏴서 맞는 물체가 없다면 원래 값에서 Y를 보정한 값을 반환한다.
 
-    /// <summary>
-    /// 클릭한 위치를 보정하는 함수
-    /// </summary>
-    private static Vector3 CorrectPos(Vector3 firstPos,Vector3 HitPos)
-    {
-        Vector3 correct_pos;
-        HitPos.y = firstPos.y; // y좌표는 유지한다.
-        Vector3 dir = HitPos - firstPos;
-        dir *= 0.9f;
-        correct_pos = firstPos + dir;  // 두 좌표 사이의 거리의 0.9배인 지점을 나타낸다
-
-        return correct_pos;
     }
 
     #endregion
@@ -72,7 +62,7 @@ public class Char_function : MonoBehaviour
         float dis = 2f;
         for (int i = 0; i < colls.Length; i++)
         {
-            if (colls[i].gameObject.tag == Target_Tag)
+            if (colls[i].gameObject.CompareTag(Target_Tag))
             {
                 float TargetDis = Vector3.Distance(colls[i].transform.position, GameManager.Instance.Player.transform.position);
                 if (TargetDis < dis)
