@@ -57,7 +57,7 @@ public class Char_function : MonoBehaviour
     /// </summary>
     public static GameObject Click_Obj(Vector3 TargetPos , string Target_Tag)
     {
-        Collider[] colls = Physics.OverlapSphere(TargetPos, 0.1f);
+        Collider[] colls = Physics.OverlapSphere(TargetPos, 0.2f);
         GameObject nearObj = null;
         float dis = 2f;
         for (int i = 0; i < colls.Length; i++)

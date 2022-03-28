@@ -49,7 +49,7 @@ public class Char_Move : MonoBehaviour
             return;
         dis = Vector3.Distance(TargetPos, transform.position);
         walk = false;
-        Atk_now = myAtk.Player_AttackCheck();
+        Atk_now = myAtk.Player_AttackCheck(TargetPos);
         myTalk.Talk_NPC();
 
         if (dis>0.5f || (dis >= 0.05f && !myAtk.now_fight)) //거리가 0.5f이상으로 멀거나 거리가 0.05f보다 멀고 공격중이 아닐때
@@ -87,8 +87,8 @@ public class Char_Move : MonoBehaviour
     public void Monster_Kill()
     {
         Atk_now = false;
-        myAtk.now_fight = false;
         walk = false;
+        myAtk.Monster_Die();
         GameManager.Instance.TargetPos = transform.position;
     }
 

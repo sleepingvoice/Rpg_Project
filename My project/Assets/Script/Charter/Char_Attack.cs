@@ -10,6 +10,7 @@ public class Char_Attack : MonoBehaviour
     private Obj_State my_state;     // 나의 상태창 가져오기
     private Action Delay;           // 딜레이 업데이트에 돌리는용도
     private GameObject nearMonster; // 공격 대상 몬스터
+    private Vector3 nowTarget;
 
     public bool now_fight;          // 전투중인지 아닌지 판단
     
@@ -23,6 +24,7 @@ public class Char_Attack : MonoBehaviour
         my_state = GetComponent<Obj_State>();
         nearMonster = null;
         now_fight = false;
+        nowTarget = transform.position;
     }
 
     private void Update()
@@ -41,9 +43,13 @@ public class Char_Attack : MonoBehaviour
     /// <summary>
     /// 플레이어의 공격 유무를 체크
     /// </summary>
-    public bool Player_AttackCheck()
+    public bool Player_AttackCheck(Vector3 TargetPos)
     {
-        nearMonster = Char_function.Click_Obj(GameManager.Instance.TargetPos, "Monster"); // 클릭한 지점의 Monster 라는 tag를 가진 오브젝트를 반환
+        if (now_fight == false || nowTarget != TargetPos)
+        {
+            nowTarget = TargetPos;
+            nearMonster = Char_function.Click_Obj(TargetPos, "Monster"); // 클릭한 지점의 Monster 라는 tag를 가진 오브젝트를 반환
+        }
 
         if (nearMonster != null) // 만약 오브젝트가 존재한다면
         {
@@ -96,6 +102,14 @@ public class Char_Attack : MonoBehaviour
     {
         if (Attack_delay <= my_state.Atk_Time)
             Attack_delay += Time.deltaTime;
+    }
+
+    public void Monster_Die()
+    {
+        now_fight = false;
+        nearMonster = null;
+        Attack_delay = 1000f;
+        Delay = null;
     }
 
     #endregion
